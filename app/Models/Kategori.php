@@ -15,7 +15,6 @@ class kategori extends Model
     //fillable
     protected $fillable = [
         'nama_kategori',
-        'deskripsi'
     ];
 
     //timestamps

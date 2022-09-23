@@ -18,8 +18,7 @@ return new class extends Migration
             $table->char('id_siswa', 6)->unique();
             $table->timestamp('waktu_transaksi');
             $table->integer('saldo_akhir');
-            $table->timestamps();
-
+            
             $table->foreign('id_siswa', 'fk_id_siswa')->references('id_siswa')->on('siswa');
         });
     }
