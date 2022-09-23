@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class transaksi_withdraw extends Model
+class TransaksiWithdraw extends Model
 {
     use HasFactory;
-    protected $table = 'transaksi_withdraws';
+    protected $table = 'transaksi_withdraw';
     protected $primaryKey = 'id_withdraw';
     public $timestamps = false;
     protected $fillable = [

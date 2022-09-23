@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transaksi_belis', function (Blueprint $table) {
-            $table->id('id_beli');
-            $table->char('id_barang');
-            $table->integer('kuantitas');
-            $table->integer('harga_total');
-            $table->timestamps();
+        Schema::create('transaksi_withdraw', function (Blueprint $table) {
+            $table->id("id_withdraw");
+            $table->integer("jumlah_withdraw");
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaksi_belis');
+        Schema::dropIfExists('transaksi_withdraws');
     }
 };

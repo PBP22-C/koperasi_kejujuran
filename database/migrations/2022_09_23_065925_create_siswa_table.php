@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transaksi_withdraws', function (Blueprint $table) {
-            $table->id("id_withdraw");
-            $table->integer("jumlah_withdraw");
+        Schema::create('siswa', function (Blueprint $table) {
+            $table->id('id_siswa');
+            $table->string('nama_siswa');
+            $table->integer('saldo');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaksi_withdraws');
+        Schema::dropIfExists('siswas');
     }
 };
