@@ -12,6 +12,7 @@ class Siswa extends Model
     //primary key
     protected $primaryKey = 'id_siswa';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     //fillable
     protected $fillable = [

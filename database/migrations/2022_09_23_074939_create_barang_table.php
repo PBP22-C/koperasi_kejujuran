@@ -20,9 +20,12 @@ return new class extends Migration
             $table->string('foto');
             $table->string('deskripsi');
             $table->integer('stok');
-            $table->integer('id_kategori');
-            $table->char('id_siswa_penjual',6);
+            $table->unsignedBigInteger('id_kategori');
+            $table->char('id_siswa_penjual', 6);
             $table->timestamps();
+
+            $table->foreign('id_kategori', 'fk_id_kategori')->references('id_kategori')->on('kategori');
+            $table->foreign('id_siswa_penjual', 'fk_siswa_penjual')->references('id_siswa')->on('siswa');
         });
     }
 
