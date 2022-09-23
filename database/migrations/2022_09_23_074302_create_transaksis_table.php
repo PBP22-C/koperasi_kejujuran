@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transaksis', function (Blueprint $table) {
+        Schema::create('transaksi', function (Blueprint $table) {
             $table->id('id_transaksi');
             $table->integer('id_siswa');
             $table->timestamp('waktu_transaksi');
