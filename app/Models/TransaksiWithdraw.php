@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TransaksiWithdraw extends Model
 {
     use HasFactory;
-    protected $table = 'transaksi_withdraws';
+    protected $table = 'transaksi_withdraw';
     protected $primaryKey = 'id_withdraw';
     public $timestamps = false;
     protected $fillable = [
