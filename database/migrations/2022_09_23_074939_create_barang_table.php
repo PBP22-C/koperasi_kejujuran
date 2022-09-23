@@ -17,13 +17,12 @@ return new class extends Migration
             $table->id('id_barang');
             $table->string('nama_barang');
             $table->integer('harga');
-            $table->string('foto');
-            $table->string('deskripsi');
+            $table->string('foto')->nullable();
+            $table->string('deskripsi')->nullable();
             $table->integer('stok');
-            $table->unsignedBigInteger('id_kategori');
+            $table->unsignedBigInteger('id_kategori')->nullable();
             $table->char('id_siswa_penjual', 6);
-            $table->timestamps();
-
+    
             $table->foreign('id_kategori', 'fk_id_kategori')->references('id_kategori')->on('kategori');
             $table->foreign('id_siswa_penjual', 'fk_siswa_penjual')->references('id_siswa')->on('siswa');
         });
