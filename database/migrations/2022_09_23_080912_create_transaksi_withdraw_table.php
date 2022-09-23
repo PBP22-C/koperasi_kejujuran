@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('transaksi_withdraw', function (Blueprint $table) {
             $table->id("id_withdraw");
             $table->integer("jumlah_withdraw");
+
+            $table->foreign('id_withdraw', 'fk_id_withdraw')->references('id_transaksi')->on('transaksi');
         });
     }
 

@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('transaksi_beli', function (Blueprint $table) {
             $table->id('id_beli');
-            $table->char('id_barang');
+            $table->unsignedBigInteger('id_barang');
             $table->integer('kuantitas');
             $table->integer('harga_total');
             $table->timestamps();
+
+            $table->foreign('id_beli', 
+            'fk_id_beli')->references('id_transaksi')->on('transaksi');
+            $table->foreign('id_barang', 'fk_id_barang')->references('id_barang')->on('barang');
         });
     }
 
