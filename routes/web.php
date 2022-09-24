@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\BarangController@index');
+Route::get('/barang', 'App\Http\Controllers\BarangController@show');
 Route::get('/barang/create', 'App\Http\Controllers\BarangController@create');
 Route::post('/barang/store', 'App\Http\Controllers\BarangController@store');
 Route::get('/barang/edit/{id}', 'App\Http\Controllers\BarangController@edit');

@@ -61,7 +61,7 @@ class BarangController extends Controller
         $data->timestamps = false;
 
         $data->save();
-        return redirect('/');
+        return Response()->json(['data' => $data, 'message' => 'Data Berhasil Ditambahkan'], 200);
     }
 
     /**
@@ -72,7 +72,8 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        return view('barang.show', compact('barang'));
+        $barang = Barang::with('kategori')->get();
+        return Response()->json(['data' => $barang, 'message' => 'Data berhasil ditampilkan'], 200);
     }
 
     /**
@@ -85,7 +86,8 @@ class BarangController extends Controller
     {
         $barang = Barang::find($id);
         $kategori = Kategori::all();
-        return view('barang.edit', ['barang' => $barang, 'kategori' => $kategori]);
+        //return json
+        return Response()->json(['data' => $barang], 200);
     }
 
     /**
@@ -124,7 +126,7 @@ class BarangController extends Controller
         $data->timestamps = false;
 
         $data->save();
-        return redirect('/');
+        return Response()->json(['data' => $data, 'message' => 'Data berhasil diubah'], 200);
     }
 
     /**
@@ -140,6 +142,6 @@ class BarangController extends Controller
             unlink(public_path('images') . '/' . $barang->foto);
         }
         Barang::destroy($id);
-        return redirect('/');
+        return Response()->json(['message' => 'Data berhasil dihapus'], 200);
     }
 }
