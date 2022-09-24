@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kategori;
-use App\Http\Requests\StorekategoriRequest;
-use App\Http\Requests\UpdatekategoriRequest;
+use App\Models\Kategori;
+use App\Http\Requests\StoreKategoriRequest;
+use App\Http\Requests\UpdateKategoriRequest;
 
 class KategoriController extends Controller
 {
@@ -31,10 +31,10 @@ class KategoriController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorekategoriRequest  $request
+     * @param  \App\Http\Requests\StoreKategoriRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorekategoriRequest $request)
+    public function store(StoreKategoriRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class KategoriController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\kategori  $kategori
+     * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function show(kategori $kategori)
+    public function show(Kategori $kategori)
     {
         //
     }
@@ -53,10 +53,10 @@ class KategoriController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\kategori  $kategori
+     * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function edit(kategori $kategori)
+    public function edit(Kategori $kategori)
     {
         //
     }
@@ -64,11 +64,11 @@ class KategoriController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatekategoriRequest  $request
-     * @param  \App\Models\kategori  $kategori
+     * @param  \App\Http\Requests\UpdateKategoriRequest  $request
+     * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatekategoriRequest $request, kategori $kategori)
+    public function update(UpdateKategoriRequest $request, Kategori $kategori)
     {
         //
     }
@@ -76,10 +76,10 @@ class KategoriController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\kategori  $kategori
+     * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(kategori $kategori)
+    public function destroy(Kategori $kategori)
     {
         //
     }

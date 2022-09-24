@@ -10,7 +10,7 @@ class Barang extends Model
     use HasFactory;
 
 
-    protected $table = 'barangs';
+    protected $table = 'barang';
     protected $primaryKey = 'id_barang';
     protected $fillable = [
         'nama_barang',
@@ -18,5 +18,14 @@ class Barang extends Model
         'stok',
         'id_siswa_penjual',
     ];
-    
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori');
+    }
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'id_siswa_penjual');
+    }
 }

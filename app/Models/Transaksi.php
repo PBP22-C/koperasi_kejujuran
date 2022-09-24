@@ -9,6 +9,7 @@ class transaksi extends Model
 {
     use HasFactory;
 
+    protected $table = 'transaksi';
     protected $primaryKey = 'id_transaksi';
 
     protected $fillable = [
@@ -18,4 +19,9 @@ class transaksi extends Model
     ];
 
     public $timestamps = false;
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'id_siswa');
+    }
 }

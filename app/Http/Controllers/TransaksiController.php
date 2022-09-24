@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\transaksi;
-use App\Http\Requests\StoretransaksiRequest;
-use App\Http\Requests\UpdatetransaksiRequest;
+use App\Models\Transaksi;
+use App\Http\Requests\StoreTransaksiRequest;
+use App\Http\Requests\UpdateTransaksiRequest;
 
 class TransaksiController extends Controller
 {
@@ -31,10 +31,10 @@ class TransaksiController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoretransaksiRequest  $request
+     * @param  \App\Http\Requests\StoreTransaksiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoretransaksiRequest $request)
+    public function store(StoreTransaksiRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class TransaksiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\transaksi  $transaksi
+     * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function show(transaksi $transaksi)
+    public function show(Transaksi $transaksi)
     {
         //
     }
@@ -53,10 +53,10 @@ class TransaksiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\transaksi  $transaksi
+     * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(transaksi $transaksi)
+    public function edit(Transaksi $transaksi)
     {
         //
     }
@@ -64,11 +64,11 @@ class TransaksiController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatetransaksiRequest  $request
-     * @param  \App\Models\transaksi  $transaksi
+     * @param  \App\Http\Requests\UpdateTransaksiRequest  $request
+     * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatetransaksiRequest $request, transaksi $transaksi)
+    public function update(UpdateTransaksiRequest $request, Transaksi $transaksi)
     {
         //
     }
@@ -76,10 +76,10 @@ class TransaksiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\transaksi  $transaksi
+     * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(transaksi $transaksi)
+    public function destroy(Transaksi $transaksi)
     {
         //
     }

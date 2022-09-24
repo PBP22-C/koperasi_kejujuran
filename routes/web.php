@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::post('/barang', function () {
-    return view('barang');
-});
-Route::get('/barang', function () {
-    return view('barang');
-});
+Route::get('/', 'App\Http\Controllers\BarangController@index');
+Route::get('/barang/create', 'App\Http\Controllers\BarangController@create');
+Route::post('/barang/store', 'App\Http\Controllers\BarangController@store');
+Route::get('/barang/edit/{id}', 'App\Http\Controllers\BarangController@edit');
+Route::post('/barang/update', 'App\Http\Controllers\BarangController@update');
+Route::get('/barang/delete/{id}', 'App\Http\Controllers\BarangController@destroy');

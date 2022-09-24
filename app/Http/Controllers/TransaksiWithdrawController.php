@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\transaksi_withdraw;
-use App\Http\Requests\Storetransaksi_withdrawRequest;
-use App\Http\Requests\Updatetransaksi_withdrawRequest;
+use App\Models\TransaksiWithdraw;
+use App\Http\Requests\StoreTransaksiWithdrawRequest;
+use App\Http\Requests\UpdateTransaksiWithdrawRequest;
 
 class TransaksiWithdrawController extends Controller
 {
@@ -31,10 +31,10 @@ class TransaksiWithdrawController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Storetransaksi_withdrawRequest  $request
+     * @param  \App\Http\Requests\StoreTransaksiWithdrawRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Storetransaksi_withdrawRequest $request)
+    public function store(StoreTransaksiWithdrawRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class TransaksiWithdrawController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\transaksi_withdraw  $transaksi_withdraw
+     * @param  \App\Models\TransaksiWithdraw  $transaksi_withdraw
      * @return \Illuminate\Http\Response
      */
-    public function show(transaksi_withdraw $transaksi_withdraw)
+    public function show(TransaksiWithdraw $transaksi_withdraw)
     {
         //
     }
@@ -53,10 +53,10 @@ class TransaksiWithdrawController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\transaksi_withdraw  $transaksi_withdraw
+     * @param  \App\Models\TransaksiWithdraw  $transaksi_withdraw
      * @return \Illuminate\Http\Response
      */
-    public function edit(transaksi_withdraw $transaksi_withdraw)
+    public function edit(TransaksiWithdraw $transaksi_withdraw)
     {
         //
     }
@@ -64,11 +64,11 @@ class TransaksiWithdrawController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Updatetransaksi_withdrawRequest  $request
-     * @param  \App\Models\transaksi_withdraw  $transaksi_withdraw
+     * @param  \App\Http\Requests\UpdateTransaksiWithdrawRequest  $request
+     * @param  \App\Models\TransaksiWithdraw  $transaksi_withdraw
      * @return \Illuminate\Http\Response
      */
-    public function update(Updatetransaksi_withdrawRequest $request, transaksi_withdraw $transaksi_withdraw)
+    public function update(UpdateTransaksiWithdrawRequest $request, TransaksiWithdraw $transaksi_withdraw)
     {
         //
     }
@@ -76,10 +76,10 @@ class TransaksiWithdrawController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\transaksi_withdraw  $transaksi_withdraw
+     * @param  \App\Models\TransaksiWithdraw  $transaksi_withdraw
      * @return \Illuminate\Http\Response
      */
-    public function destroy(transaksi_withdraw $transaksi_withdraw)
+    public function destroy(TransaksiWithdraw $transaksi_withdraw)
     {
         //
     }

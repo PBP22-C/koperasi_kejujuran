@@ -10,6 +10,7 @@ class Siswa extends Model
     use HasFactory;
 
     //primary key
+    protected $table = 'siswa';
     protected $primaryKey = 'id_siswa';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -27,4 +28,9 @@ class Siswa extends Model
 
     //timestamps
     public $timestamps = false;
+
+    public function barang()
+    {
+        return $this->hasMany(Barang::class, 'id_siswa_penjual');
+    }
 }

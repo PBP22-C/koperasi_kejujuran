@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class KategoriSeeder extends Seeder
 {
@@ -14,6 +14,24 @@ class KategoriSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('kategori')->insert(
+            ['nama_kategori' => 'makanan'],
+
+        );
+        DB::table('kategori')->insert(
+            ['nama_kategori' => 'minuman'],
+        );
+        DB::table('kategori')->insert(
+            ['nama_kategori' => 'pakaian'],
+
+        );
+        DB::table('kategori')->insert(
+            ['nama_kategori' => 'mainan'],
+
+        );
+        DB::table('kategori')->insert(
+            ['nama_kategori' => 'elektronik'],
+
+        );
     }
 }

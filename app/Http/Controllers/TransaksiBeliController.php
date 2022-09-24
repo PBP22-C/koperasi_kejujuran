@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\transaksi_beli;
-use App\Http\Requests\Storetransaksi_beliRequest;
-use App\Http\Requests\Updatetransaksi_beliRequest;
+use App\Models\TransaksiBeli;
+use App\Http\Requests\StoreTransaksiBeliRequest;
+use App\Http\Requests\UpdateTransaksiBeliRequest;
 
 class TransaksiBeliController extends Controller
 {
@@ -31,10 +31,10 @@ class TransaksiBeliController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Storetransaksi_beliRequest  $request
+     * @param  \App\Http\Requests\StoreTransaksiBeliRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Storetransaksi_beliRequest $request)
+    public function store(StoreTransaksiBeliRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class TransaksiBeliController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\transaksi_beli  $transaksi_beli
+     * @param  \App\Models\TransaksiBeli  $transaksi_beli
      * @return \Illuminate\Http\Response
      */
-    public function show(transaksi_beli $transaksi_beli)
+    public function show(TransaksiBeli $transaksi_beli)
     {
         //
     }
@@ -53,10 +53,10 @@ class TransaksiBeliController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\transaksi_beli  $transaksi_beli
+     * @param  \App\Models\TransaksiBeli  $transaksi_beli
      * @return \Illuminate\Http\Response
      */
-    public function edit(transaksi_beli $transaksi_beli)
+    public function edit(TransaksiBeli $transaksi_beli)
     {
         //
     }
@@ -64,11 +64,11 @@ class TransaksiBeliController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Updatetransaksi_beliRequest  $request
-     * @param  \App\Models\transaksi_beli  $transaksi_beli
+     * @param  \App\Http\Requests\UpdateTransaksiBeliRequest  $request
+     * @param  \App\Models\TransaksiBeli  $transaksi_beli
      * @return \Illuminate\Http\Response
      */
-    public function update(Updatetransaksi_beliRequest $request, transaksi_beli $transaksi_beli)
+    public function update(UpdateTransaksiBeliRequest $request, TransaksiBeli $transaksi_beli)
     {
         //
     }
@@ -76,10 +76,10 @@ class TransaksiBeliController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\transaksi_beli  $transaksi_beli
+     * @param  \App\Models\TransaksiBeli  $transaksi_beli
      * @return \Illuminate\Http\Response
      */
-    public function destroy(transaksi_beli $transaksi_beli)
+    public function destroy(TransaksiBeli $transaksi_beli)
     {
         //
     }

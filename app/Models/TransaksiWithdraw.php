@@ -14,5 +14,4 @@ class TransaksiWithdraw extends Model
     protected $fillable = [
         'jumlah_withdraw'
     ];
-    
 }
