@@ -40,10 +40,12 @@
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Foto Barang</label>
                         <div class="image">
-                            <img id="foto" src="" alt="" class="img-thumbnail" width="200">
+                            <img id="foto" src="" alt="" class="img-thumbnail"
+                                style="height:200px;">
                         </div>
-                        <input class="form-control" type="file" id="formFile" name="image">
+                        <input class="form-control" type="file" id="formFile" name="image" accept="image/*">
                     </div>
+                    <div id="errorField" class="text-danger"></div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-danger" data-bs-dismiss="modal" type="button">

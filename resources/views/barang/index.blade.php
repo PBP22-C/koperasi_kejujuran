@@ -40,8 +40,8 @@
                 $('#id_kategori').val(barang.id_kategori);
                 $('#harga').val(barang.harga);
                 $('#stok').val(barang.stok);
-                $('#foto').src = barang.foto;
-                $('#foto').alt = barang.nama_barang;
+                $('#foto').attr('src', `{{ asset('images/${barang.foto}') }}`);
+                $('#foto').attr('alt', barang.nama_barang);
                 $('#submitButton').html('Ubah Data');
             }
         });
@@ -83,6 +83,12 @@
                 $('#modalBarang').modal('hide');
                 resetModal();
                 showBarang();
+            },
+            error: function(err) {
+                console.log(err);
+                $('#submitButton').html('Tambah Data');
+                $('#submitButton').attr('disabled', false);
+                $('#errorField').html(err.responseJSON.message);
             }
         });
     });
@@ -139,6 +145,7 @@
     function resetModal() {
         $('#modalTitle').html('');
         $('#submitButton').html('');
+        $('#submitButton').attr('disabled', false);
         $('#id_barang').val('');
         $('#nama_barang').val('');
         $('#deskripsi').val('');
@@ -146,6 +153,7 @@
         $('#stok').val('');
         $('#foto').src = '';
         $('#foto').alt = '';
+        $('#formFile').replaceWith($('#formFile').val('').clone(true));
         $('#id_kategori').val('');
     }
 </script>
