@@ -1,7 +1,7 @@
 <x-layout>
     <div class="container my-5">
-        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4">
-            <h1>List Barang</h1>
+        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4 bg">
+            <h1 class="text-white">List Barang</h1>
             <button onclick="showTambah()" type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#tambahBarang">
                 Tambah Barang
@@ -106,17 +106,20 @@
                     const item = barang[i];
                     result +=
                         `
-                        <div class="card" style="width: 18rem;">
-                            <img src="/images/${item.foto}" class="card-img-top" alt="${item.nama_barang}" height="250" style="object-fit:cover;">
+                        <div class="card bg-dark" style="width: 18rem;">
+                            <img src="/images/${item.foto}" class="card-img-top text-white" alt="${item.nama_barang}" height="250" style="object-fit:cover;">
                             <div class="card-body">
-                                <h5 class="card-title mb-0">${item.nama_barang}</h5>
-                                <small class="text-secondary">${item.kategori.nama_kategori}</small>
-                                <p class="card-text mt-3">${item.deskripsi}</p>
+                                <h5 class="card-title mb-0 text-white fw-bold">${item.nama_barang}</h5>
+                                <br>
+                                <small class="card-text text-secondary">Stok: ${item.stok}</small>
+                                <br>
+                                <small class="card-text text-secondary">Price: Rp${item.harga}</small>
+                                <br><br>
                                 <div class="d-flex flex-wrap gap-3">
-                                    <button onclick="showEdit(${item.id_barang})" type="button" class="btn btn-warning">
+                                    <button onclick="showEdit(${item.id_barang})" type="button" class="btn btn-warning text-white">
                                         Edit Barang
                                     </button>
-                                    <button type="button" onclick="deleteBarang(${item.id_barang})" class="btn btn-outline-danger">Hapus
+                                    <button type="button" onclick="deleteBarang(${item.id_barang})" class="btn btn-outline-danger text-white">Hapus
                                         Barang</button>
                                 </div>
                             </div>
