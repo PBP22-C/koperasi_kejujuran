@@ -2,11 +2,11 @@
 <div class="modal fade" id="modalBarang" tabindex="-1" aria-labelledby="modalBarangLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-bg-primary border-bottom-0">
                 <h5 id="modalTitle" class="modal-title" id="modalBarangLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="text-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="formBarang" enctype="multipart/form-data">
+            <form id="formBarang" class="bg-dark text-light" enctype="multipart/form-data">
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <input type="hidden" name="id_barang" id="id_barang"> <br />
@@ -47,7 +47,7 @@
                     </div>
                     <div id="errorField" class="text-danger"></div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer border-top-0">
                     <button class="btn btn-outline-danger" data-bs-dismiss="modal" type="button">
                         Kembali
                     </button>

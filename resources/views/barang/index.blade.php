@@ -106,7 +106,7 @@
                     const item = barang[i];
                     result +=
                         `
-                        <div class="card bg-dark" style="width: 18rem;">
+                        <div class="card bg-dark border-light" style="width: 18rem;">
                             <img src="/images/${item.foto}" class="card-img-top text-white" alt="${item.nama_barang}" height="250" style="object-fit:cover;">
                             <div class="card-body">
                                 <h5 class="card-title mb-0 text-white fw-bold">${item.nama_barang}</h5>
