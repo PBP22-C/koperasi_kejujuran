@@ -14,7 +14,7 @@ Edit the configuration inside .env, for example:
 - DB_PORT=3306
 - DB_DATABASE=koperasi_kejujuran
 
-In the example above we create database named anforcom which runs on Localhost (127.0.0.1) on port 3306
+In the example above we create database named koperasi_kejujuran which runs on Localhost (127.0.0.1) on port 3306
 
 #### 3. Generate key
 ```
