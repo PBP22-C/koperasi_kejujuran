@@ -32,5 +32,8 @@ class KategoriSeeder extends Seeder
         Kategori::create(
             ['nama_kategori' => 'elektronik'],
         );
+        Kategori::create(
+            ['nama_kategori' => 'alat tulis'],
+        );
     }
 }
