@@ -35,8 +35,8 @@
                 </ul>
                 <div class="box-price">
                     <i class="fa-solid fa-cash-register fs-1 mb-3"></i>
-                    <h5 class="text-white">Total Price</h5>
-                    <h4 class="text-white">Rp1.000.000.000</h3>
+                    <h5 class="text-white">Total Saldo</h5>
+                    <h4  id="saldo" class="text-white"></h3>
                 </div>
                 <hr>
 
@@ -50,3 +50,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        getSaldo();
+    });
+    function getSaldo() {
+        $.ajax({
+            type: "GET",
+            url: `{{ url('/saldo') }}`,
+            dataType: 'json',
+            success: function(res) {
+                const saldo = res.data;
+                $('#saldo').html(saldo);
+            }
+        });
+    }
+</script>
+
+

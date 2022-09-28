@@ -10,6 +10,8 @@
     </div>
     <div class="container my-5">
         <a href="/logout" class="btn btn-danger">Logout</a>
+        <div>Saldo: {{ Auth::user()->saldo }}</div>
+        <button>Withdraw</button>
         <h2>{{ Auth::user()->id_siswa }}</h2>
         <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4 bg">
             <h1 class="text-white">List Barang</h1>

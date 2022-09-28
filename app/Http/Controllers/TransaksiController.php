@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use App\Http\Requests\StoreTransaksiRequest;
 use App\Http\Requests\UpdateTransaksiRequest;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
@@ -13,9 +14,16 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function saldo()
     {
-        //
+        $transaksi = DB::table('transaksi')->where('id_transaksi', '=', DB::table('transaksi')->max('id_transaksi'))->get();
+        if ($transaksi->isNotEmpty()) {
+            $saldo = $transaksi[0]->saldo_akhir;
+        } else {
+            $saldo = 0;
+        }
+
+        return Response()->json(['data' => $saldo, 'message' => 'Data berhasil diambil'], 200);
     }
 
     /**

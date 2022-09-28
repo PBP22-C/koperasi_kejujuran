@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -88,7 +89,7 @@ class DashboardController extends Controller
     }
 
     public function getData() {
-        $id_user = '12456';
+        $id_user = Auth::user()->id_siswa;
         $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->get();
         $kategori = Kategori::all();
 
