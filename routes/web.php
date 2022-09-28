@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\BarangController@index');
-Route::get('/barang', 'App\Http\Controllers\BarangController@show');
-Route::get('/barang/create', 'App\Http\Controllers\BarangController@create');
-Route::post('/barang/store', 'App\Http\Controllers\BarangController@store');
-Route::get('/barang/edit/{id}', 'App\Http\Controllers\BarangController@edit');
-Route::post('/barang/update', 'App\Http\Controllers\BarangController@update');
-Route::get('/barang/delete/{id}', 'App\Http\Controllers\BarangController@destroy');
+// Route::get('/', 'App\Http\Controllers\MenuPenjualController@index');
+Route::get('/dashboard/menu-penjual', 'App\Http\Controllers\MenuPenjualController@index');
+Route::get('/dashboard/menu-penjual/create', 'App\Http\Controllers\MenuPenjualController@create');
+Route::post('/dashboard/menu-penjual/store', 'App\Http\Controllers\MenuPenjualController@store');
+Route::get('/dashboard/menu-penjual/edit/{id}', 'App\Http\Controllers\MenuPenjualController@edit');
+Route::post('/dashboard/menu-penjual/update', 'App\Http\Controllers\MenuPenjualController@update');
+Route::get('/dashboard/menu-penjual/delete/{id}', 'App\Http\Controllers\MenuPenjualController@destroy');
+
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
+Route::get('/dashboard/getData', 'App\Http\Controllers\DashboardController@getData');
+Route::post('/dashboard/buy', 'App\Http\Controllers\DashboardController@buy');
