@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <a href="/dashboard/menu-penjual" class="nav-link px-0 align-middle">
                             <i class="fa-solid fa-sack-xmark fs-4 me-1"></i> <span class="ms-1 d-none d-sm-inline">My
                                 Items</span> </a>
                     </li>
@@ -27,7 +27,7 @@
                                 class="ms-1 d-none d-sm-inline">Orders</span></a>
                     </li>
                     <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                        <a href="#submenu2" class="nav-link px-0 align-middle ">
                             <i class="fa-solid fa-tag fs-4 me-1"></i> <span class="ms-1 d-none d-sm-inline">My
                                 Transactions</span></a>
 

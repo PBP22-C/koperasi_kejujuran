@@ -8,9 +8,11 @@
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
-                    <li>
-                        {{ session('errorId') }}
-                    </li>
+                    @if (session('errorId'))
+                        <li>
+                            {{ session('errorId') }}
+                        </li>
+                    @endif
                 </ul>
             </div>
         @endif
@@ -38,4 +40,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
+    {{-- login button --}}
+    <div class="mt-3">
+        <a href="/login" class="btn btn-success">Login</a>
+    </div>
 </x-layout>

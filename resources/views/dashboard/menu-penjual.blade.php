@@ -8,7 +8,7 @@
             <i class="fa-solid fa-bell col-6"></i>
         </div>
     </div>
-    <div class="container my-5 bg-white">
+    <div class="container my-5">
         <a href="/logout" class="btn btn-danger">Logout</a>
         <div>Saldo: {{ Auth::user()->saldo }}</div>
         <button>Withdraw</button>
