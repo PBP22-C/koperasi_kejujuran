@@ -1,13 +1,23 @@
 <x-layout>
+    <div class="container row">
+        <div class="col-6">
+
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+        </div>
+        <div class="col-6 my-auto">
+
+            <i class="fa-solid fa-bell col-6"></i>
+        </div>
+    </div>
     <div class="container my-5">
-        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4 bg">
-            <h1 class="text-white">List Barang</h1>
+        <div class="d-flex flex-wrap align-items-center gap-3 mb-4 bg">
+            <h1 class="text-white fs-3">List Barang</h1>
             <button onclick="showTambah()" type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#tambahBarang">
                 Tambah Barang
             </button>
         </div>
-        <div id="listBarang" class="d-flex flex-wrap justify-content-center gap-3">
+        <div id="listBarang" class="d-flex flex-wrap gap-3">
 
         </div>
     </div>

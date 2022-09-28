@@ -2,9 +2,9 @@
 <div class="modal fade" id="modalBarang" tabindex="-1" aria-labelledby="modalBarangLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header text-bg-primary border-bottom-0">
+            <div class="modal-header text-light border-bottom-0" style="background: #1B1A1D;">
                 <h5 id="modalTitle" class="modal-title" id="modalBarangLabel"></h5>
-                <button type="button" class="text-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="bg-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="formBarang" class="bg-dark text-light" enctype="multipart/form-data">
                 <div class="modal-body">
