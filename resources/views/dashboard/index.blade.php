@@ -42,6 +42,19 @@
         $('#foto-barang').attr('alt', barang[id].nama_barang);
     }
 
+    function filterByKategori(idKategori) {
+        $.ajax({
+            type: "GET",
+            url: `{{ url('/dashboard/getData/${idKategori}') }}`,
+            dataType: 'json',
+            success: function(res) {
+                barang = res.barang;
+                showListBarang();
+            }
+        })
+        
+    }
+
     function showListBarang() {
         // console.log(res);
         // Show all category button
