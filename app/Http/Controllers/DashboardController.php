@@ -94,4 +94,12 @@ class DashboardController extends Controller
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
     }
+
+    public function getBarangByKategori($id_kategori) {
+        $id_user = '12456';
+        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori', $id_kategori)->get();
+        $kategori = Kategori::all();
+
+        return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
+    }
 }
