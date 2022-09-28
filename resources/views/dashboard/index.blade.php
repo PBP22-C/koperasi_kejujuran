@@ -41,10 +41,26 @@
 
     }
 
+    // fungsi filterByKategori(id_kategori) with ajax
+    function filterByKategori(idKategori) {
+        $.ajax({
+            type: "GET",
+            url: `{{ url('/dashboard/getData/${idKategori}') }}`,
+            dataType: 'json',
+            success: function(res) {
+                barang = res.barang;
+                kategori = res.kategori;
+                showListBarang();
+            }
+        })
+    }
+    
+
     function showListBarang() {
         // console.log(res);
         // Show all category button
         let elementKategori = ``;
+        elementKategori += `<button class="btn btn-primary" onclick="loadData()">All</button>`;
         for (let i = 0; i < kategori.length; i++) {
             elementKategori += 
             `
