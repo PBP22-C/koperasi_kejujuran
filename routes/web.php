@@ -43,3 +43,5 @@ Route::get('/dashboard/menu-penjual/show', 'App\Http\Controllers\MenuPenjualCont
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
 Route::get('/dashboard/getData', 'App\Http\Controllers\DashboardController@getData');
 Route::post('/dashboard/buy', 'App\Http\Controllers\DashboardController@buy');
+
+Route::get('/saldo', 'App\Http\Controllers\TransaksiController@saldo');
