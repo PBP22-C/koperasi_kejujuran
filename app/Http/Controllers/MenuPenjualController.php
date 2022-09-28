@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatebarangRequest;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class MenuPenjualController extends Controller
 {
@@ -57,7 +58,7 @@ class MenuPenjualController extends Controller
         $data->harga = $request->harga;
         $data->stok = $request->stok;
         $data->foto = $filename;
-        $data->id_siswa_penjual = '123456';
+        $data->id_siswa_penjual = Auth::user()->id_siswa;
         $data->timestamps = false;
 
         $data->save();
@@ -72,7 +73,8 @@ class MenuPenjualController extends Controller
      */
     public function show(Barang $barang)
     {
-        $barang = Barang::with('kategori')->get();
+        $id_user = Auth::user()->id_siswa;
+        $barang = Barang::with('kategori')->where('id_siswa_penjual',  $id_user)->get();
         return Response()->json(['data' => $barang, 'message' => 'Data berhasil ditampilkan'], 200);
     }
 
@@ -122,7 +124,7 @@ class MenuPenjualController extends Controller
         if ($filename) {
             $data->foto = $filename;
         }
-        $data->id_siswa_penjual = '123456';
+        $data->id_siswa_penjual = Auth::user()->id_siswa;
         $data->timestamps = false;
 
         $data->save();
