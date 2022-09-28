@@ -46,6 +46,7 @@
         // console.log(res);
         // Show all category button
         let elementKategori = ``;
+        elementKategori += `<button class="btn btn-primary" onclick="loadData()">All</button>`;
         for (let i = 0; i < kategori.length; i++) {
             elementKategori += 
             `
