@@ -1,4 +1,13 @@
 <x-layout>
+    <div class="container row">
+        <div class="col-6">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                aria-describedby="button-addon2">
+        </div>
+        <div class="col-6 my-auto">
+            <i class="fa-solid fa-bell col-6"></i>
+        </div>
+    </div>
     <div class="container my-5">
         <a href="/logout" class="btn btn-danger">Logout</a>
         <h2>{{ Auth::user()->id_siswa }}</h2>
@@ -9,7 +18,7 @@
                 Tambah Barang
             </button>
         </div>
-        <div id="listBarang" class="d-flex flex-wrap justify-content-center gap-3">
+        <div id="listBarang" class="d-flex flex-wrap gap-3">
 
         </div>
     </div>
@@ -23,7 +32,11 @@
     </x-modal>
 </x-layout>
 
+{{-- AJAX --}}
 <script>
+    $(document).ready(function() {
+        showBarang();
+    });
     const modalBarang = document.getElementById('modalBarang');
 
     $(document).ready(function() {
@@ -33,7 +46,7 @@
     function showEdit(id) {
         $.ajax({
             type: "GET",
-            url: `{{ url('/barang/edit/${id}') }}`,
+            url: `{{ url('/dashboard/menu-penjual/edit/${id}') }}`,
             dataType: 'json',
             success: function(res) {
                 console.log(res.data);
@@ -74,7 +87,8 @@
         if ($('#foto').val() != '') {
             form.append('foto', $('#foto')[0].files[0]);
         }
-        const url = $("#id_barang").val() ? `{{ url('/barang/update') }}` : `{{ url('/barang/store') }}`;
+        const url = $("#id_barang").val() ? `{{ url('/dashboard/menu-penjual/update') }}` :
+            `{{ url('/dashboard/menu-penjual/store') }}`;
         $.ajax({
             type: "POST",
             url: url,
@@ -102,7 +116,7 @@
     function showBarang() {
         $.ajax({
             type: "GET",
-            url: "{{ url('/barang') }}",
+            url: "{{ url('/dashboard/menu-penjual/show') }}",
             dataType: 'json',
             success: function(res) {
                 console.log(res.data);
@@ -141,7 +155,7 @@
         if (confirm('Apakah anda yakin ingin menghapus barang ini?')) {
             $.ajax({
                 type: "GET",
-                url: `{{ url('/barang/delete/${id}') }}`,
+                url: `{{ url('/dashboard/menu-penjual/delete/${id}') }}`,
                 dataType: 'json',
                 success: function(res) {
                     console.log(res);

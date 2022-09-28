@@ -24,16 +24,22 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/dashboard', [BarangController::class, 'index'])->middleware('auth');
-Route::get('/barang', 'App\Http\Controllers\BarangController@show');
-Route::get('/barang/create', 'App\Http\Controllers\BarangController@create');
-Route::post('/barang/store', 'App\Http\Controllers\BarangController@store');
-Route::get('/barang/edit/{id}', 'App\Http\Controllers\BarangController@edit');
-Route::post('/barang/update', 'App\Http\Controllers\BarangController@update');
-Route::get('/barang/delete/{id}', 'App\Http\Controllers\BarangController@destroy');
-
 Route::get('/register', 'App\Http\Controllers\AuthController@register');
 Route::post('/register', 'App\Http\Controllers\AuthController@register_action');
 Route::get('/login', 'App\Http\Controllers\AuthController@login');
 Route::post('/login', 'App\Http\Controllers\AuthController@login_action');
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
+
+
+// Route::get('/', 'App\Http\Controllers\MenuPenjualController@index');
+Route::get('/dashboard/menu-penjual', 'App\Http\Controllers\MenuPenjualController@index');
+Route::get('/dashboard/menu-penjual/create', 'App\Http\Controllers\MenuPenjualController@create');
+Route::post('/dashboard/menu-penjual/store', 'App\Http\Controllers\MenuPenjualController@store');
+Route::get('/dashboard/menu-penjual/edit/{id}', 'App\Http\Controllers\MenuPenjualController@edit');
+Route::post('/dashboard/menu-penjual/update', 'App\Http\Controllers\MenuPenjualController@update');
+Route::get('/dashboard/menu-penjual/delete/{id}', 'App\Http\Controllers\MenuPenjualController@destroy');
+Route::get('/dashboard/menu-penjual/show', 'App\Http\Controllers\MenuPenjualController@show');
+
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
+Route::get('/dashboard/getData', 'App\Http\Controllers\DashboardController@getData');
+Route::post('/dashboard/buy', 'App\Http\Controllers\DashboardController@buy');
