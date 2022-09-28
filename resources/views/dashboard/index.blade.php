@@ -1,10 +1,10 @@
 <x-layout>
-    <div id="listKategori" class="d-flex flex-wrap justify-content-center gap-3"></div>
-    <div id="listBarang" class="d-flex flex-wrap justify-content-center gap-3"></div>
-    <div id="confirmBeli" style="display: none">
+    <div id="listKategori" class="d-flex flex-wrap justify-content-center gap-3 "></div>
         
+    <div class="d-flex justify-content-between">
+        <div id="listBarang" class="d-flex flex-wrap justify-content-center gap-3"></div>
+        <x-informasi-barang></x-informasi-barang>
     </div>
-    <x-informasi-barang></x-informasi-barang>
 </x-layout>
 
 
@@ -36,31 +36,16 @@
         $('#informasi-barang').show();
         $('#nama-barang').html(barang[id].nama_barang);
         $('#deskripsi-barang').html(barang[id].deskripsi);
-        $('#stok').html(barang[id].stok);
-        $('#harga-barang').html(barang[id].harga);
-
+        $('#stok').html("stok : " + barang[id].stok);
+        $('#harga-barang').html("Rp"+barang[id].harga);
+        $('#foto-barang').attr('src', `{{ asset('images/${barang[id].foto}') }}`);
+        $('#foto-barang').attr('alt', barang[id].nama_barang);
     }
-
-    // fungsi filterByKategori(id_kategori) with ajax
-    function filterByKategori(idKategori) {
-        $.ajax({
-            type: "GET",
-            url: `{{ url('/dashboard/getData/${idKategori}') }}`,
-            dataType: 'json',
-            success: function(res) {
-                barang = res.barang;
-                kategori = res.kategori;
-                showListBarang();
-            }
-        })
-    }
-    
 
     function showListBarang() {
         // console.log(res);
         // Show all category button
         let elementKategori = ``;
-        elementKategori += `<button class="btn btn-primary" onclick="loadData()">All</button>`;
         for (let i = 0; i < kategori.length; i++) {
             elementKategori += 
             `

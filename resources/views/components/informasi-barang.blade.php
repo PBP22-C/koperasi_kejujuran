@@ -1,8 +1,9 @@
-<div id="informasi-barang" style="display: none; background-color:white">
+<div id="informasi-barang" style="display: none;" class="bg-dark p-2">
     <h1>Deskripsi Barang</h1>
-    <h2 id="nama-barang"></h1>
+    <img src="" id="foto-barang" class="card-img-top text-white" alt="" height="250" style="object-fit:cover;">
+    <h2 id="nama-barang" class=""></h2>
     <p id="deskripsi-barang"></p>
-    <div id="stok"></div>
+    <div id="stok" class="text-secondary"></div>
     <h2 id="harga-barang"></h1>
     <button id="beli">Beli</button>
 </div>
