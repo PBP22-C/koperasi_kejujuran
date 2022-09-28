@@ -56,7 +56,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['id_siswa' => $request->id_siswa, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/dashboard');
         }
     }
 
@@ -78,7 +78,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['id_siswa' => $request->id_siswa, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/dashboard');
         }
 
         return back()->withErrors([

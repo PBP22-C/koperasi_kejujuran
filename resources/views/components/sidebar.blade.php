@@ -11,7 +11,7 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                     id="menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
+                        <a href="/dashboard" class="nav-link align-middle px-0">
                             <i class="fa-solid fa-house-user fs-4 me-1"></i><span
                                 class="ms-1 d-none d-sm-inline">Home</span>
                         </a>
