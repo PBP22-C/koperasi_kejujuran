@@ -8,7 +8,7 @@ use App\Http\Requests\UpdatebarangRequest;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\DB;
 
-class BarangController extends Controller
+class MenuPenjualController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barang = Barang::with('kategori')->get();
-        $kategori = Kategori::all();
-        return view('barang.index', ['barang' => $barang, 'kategori' => $kategori]);
+        $kategori = DB::table('kategori')->get();
+        return view('dashboard.menu-penjual', ['kategori' => $kategori]);
     }
 
     /**

@@ -31,7 +31,11 @@
     </x-modal>
 </x-layout>
 
+{{-- AJAX --}}
 <script>
+    $(document).ready(function() {
+        showBarang();
+    });
     const modalBarang = document.getElementById('modalBarang');
 
     function showEdit(id) {
