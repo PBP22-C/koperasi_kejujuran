@@ -20,6 +20,7 @@ Route::post('/dashboard/menu-penjual/store', 'App\Http\Controllers\MenuPenjualCo
 Route::get('/dashboard/menu-penjual/edit/{id}', 'App\Http\Controllers\MenuPenjualController@edit');
 Route::post('/dashboard/menu-penjual/update', 'App\Http\Controllers\MenuPenjualController@update');
 Route::get('/dashboard/menu-penjual/delete/{id}', 'App\Http\Controllers\MenuPenjualController@destroy');
+Route::get('/dashboard/menu-penjual/show', 'App\Http\Controllers\MenuPenjualController@show');
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
 Route::get('/dashboard/getData', 'App\Http\Controllers\DashboardController@getData');
