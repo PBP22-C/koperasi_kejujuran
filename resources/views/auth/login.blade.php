@@ -6,9 +6,12 @@
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
-                    <li>
-                        {{ session('errorId') }}
-                    </li>
+                    @if (session('errorId'))
+                        <li>
+                            {{ session('errorId') }}
+                        </li>
+                    @endif
+                    
                 </ul>
             </div>
         @endif
@@ -26,4 +29,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
+    {{-- register button --}}
+    <div class="mt-3">
+        <a href="/register" class="btn btn-success">Register</a>
+    </div>
 </x-layout>
