@@ -1,5 +1,7 @@
 <x-layout>
     <div class="container my-5">
+        <a href="/logout" class="btn btn-danger">Logout</a>
+        <h2>{{ Auth::user()->id_siswa }}</h2>
         <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4 bg">
             <h1 class="text-white">List Barang</h1>
             <button onclick="showTambah()" type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -23,6 +25,10 @@
 
 <script>
     const modalBarang = document.getElementById('modalBarang');
+
+    $(document).ready(function() {
+        showBarang();
+    });
 
     function showEdit(id) {
         $.ajax({

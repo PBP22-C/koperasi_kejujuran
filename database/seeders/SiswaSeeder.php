@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Siswa;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class SiswaSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class SiswaSeeder extends Seeder
             [
                 'id_siswa' => '123456',
                 'nama_siswa' => fake()->name,
+                'password' => Hash::make('123456'),
                 'saldo' => 0,
             ],
         );

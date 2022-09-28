@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdatebarangRequest;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class BarangController extends Controller
 {
