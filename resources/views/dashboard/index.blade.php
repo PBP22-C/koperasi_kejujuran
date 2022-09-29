@@ -1,10 +1,11 @@
 <x-layout>
-    <div id="listKategori" class="d-flex flex-wrap justify-content-center gap-3 "></div>
+    <div id="listKategori" class="d-flex flex-wrap justify-content-start gap-3 mb-3"></div>
         
     <div class="d-flex justify-content-between">
         <div id="listBarang" class="d-flex flex-wrap justify-content-center gap-3"></div>
         <x-informasi-barang></x-informasi-barang>
     </div>
+
 </x-layout>
 
 
@@ -59,11 +60,11 @@
         // console.log(res);
         // Show all category button
         let elementKategori = ``;
-        elementKategori += `<button class="btn btn-primary" onclick="loadData()">All</button>`;
+        elementKategori += `<button class="btn btn-outline-light" onclick="loadData()">All</button>`;
         for (let i = 0; i < kategori.length; i++) {
             elementKategori += 
             `
-            <button onclick="filterByKategori(${kategori[i].id_kategori})">${kategori[i].nama_kategori}</button>
+            <button class="btn btn-outline-light" onclick="filterByKategori(${kategori[i].id_kategori})">${kategori[i].nama_kategori}</button>
             `
         }
         
@@ -86,7 +87,7 @@
                         <small class="card-text text-secondary">Price: Rp${item.harga}</small>
                         <br><br>
                         <div class="d-flex flex-wrap gap-3">
-                            <button onclick="showInformasi(${i})">
+                            <button class="btn btn-warning" onclick="showInformasi(${i})">
                                 Deskripsi Barang
                             </button>
                         </div>
