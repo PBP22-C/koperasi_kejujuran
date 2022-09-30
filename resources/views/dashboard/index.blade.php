@@ -1,4 +1,15 @@
 <x-layout>
+    <div class="container row mb-4">
+        <div class="col-6">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                aria-describedby="button-addon2">
+        </div>
+        <div class="col-6 my-auto">
+            <i class="fa-solid fa-bell col-6"></i>
+        </div>
+    </div>
+    <h1 class="text-white mb-3">Koperasi Kejujuran</h1>
+    
     <div id="listKategori" class="d-flex flex-wrap justify-content-start gap-3 mb-3"></div>
         
     <div class="d-flex justify-content-between">

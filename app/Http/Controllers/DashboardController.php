@@ -103,4 +103,15 @@ class DashboardController extends Controller
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
     }
+    // get nama user
+    public function getNamaUser() {
+        // nama user
+        $nama_user = Auth::user()->nama_siswa;
+
+        
+
+        
+
+        return Response()->json(['data' => $nama_user, 'message' => 'Data berhasil diambil'], 200);
+    }
 }

@@ -6,7 +6,7 @@
                 <div class="container d-flex flex-column align-items-center justify-content-center gap-2">
                     <img src="https://github.com/mdo.png" alt="hugenerd" width="90" height="90"
                         class="rounded-circle">
-                    <h3 class="">Admin</h3>
+                    <h3 class="" id="user-name"></h3>
                 </div>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                     id="menu">
@@ -54,6 +54,7 @@
 <script>
     $(document).ready(function() {
         getSaldo();
+        getName();
     });
     function getSaldo() {
         $.ajax({
@@ -63,6 +64,17 @@
             success: function(res) {
                 const saldo = res.data;
                 $('#saldo').html(saldo);
+            }
+        });
+    }
+    function getName() {
+        $.ajax({
+            type: "GET",
+            url: `{{ url('/name') }}`,
+            dataType: 'json',
+            success: function(res) {
+                const name = res.data;
+                $('#user-name').html(name);
             }
         });
     }
