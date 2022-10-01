@@ -9,12 +9,8 @@
         </div>
     </div>
     <div class="container my-5">
-        <a href="/logout" class="btn btn-danger">Logout</a>
-        <div>Saldo: {{ Auth::user()->saldo }}</div>
-        <button>Withdraw</button>
-        <h2>{{ Auth::user()->id_siswa }}</h2>
-        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4 bg">
-            <h1 class="text-white">List Barang</h1>
+        <div class="d-flex flex-wrap align-items-center gap-3 mb-4 bg">
+            <h1 class="text-white justify-content-between me-auto">List Barang</h1>
             <button onclick="showTambah()" type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#tambahBarang">
                 Tambah Barang
@@ -66,6 +62,13 @@
                 $('#submitButton').html('Ubah Data');
             }
         });
+    }
+
+    function showWithdraw() {
+        resetModal();
+        $('#modalWithdraw').modal('show');
+        $('#modalWithdrawTitle').html('Withdraw');
+        $('#submitWitdraw').html('Tarik Uang');
     }
 
     function showTambah() {
@@ -129,7 +132,7 @@
                     result +=
                         `
                         <div class="card bg-dark border-light" style="width: 18rem;">
-                            <img src="/images/${item.foto}" class="card-img-top text-white" alt="${item.nama_barang}" height="250" style="object-fit:cover;">
+                            <img src="${item.foto ? `/images/${item.foto}` : 'https://static.wikia.nocookie.net/find-the-markers-roblox/images/5/5f/Placeholder.jpg/revision/latest?cb=20220313030844'}" class="card-img-top text-white" alt="${item.nama_barang}" height="250" style="object-fit:cover;">
                             <div class="card-body">
                                 <h5 class="card-title mb-0 text-white fw-bold">${item.nama_barang}</h5>
                                 <br>
@@ -181,4 +184,6 @@
         $('#formFile').replaceWith($('#formFile').val('').clone(true));
         $('#id_kategori').val('');
     }
+    // withdraw saldo
+
 </script>

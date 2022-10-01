@@ -9,16 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        // $id_user = session('id_user');
-        // $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->get();
-        // $kategori = Kategori::all();
         return view('dashboard.index');
     }
 
@@ -29,54 +21,29 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        $id_user = Auth::user()->id_siswa;
+        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('stok', '>', 0)->get();
+        $kategori = Kategori::all();
+
+        return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function getBarangByKategori($id_kategori)
     {
-        //
+        $id_user = Auth::user()->id_siswa;
+        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori', $id_kategori)->get();
+        $kategori = Kategori::all();
+
+        return Response()->json(['barang' => $barang, 'kategori' => $kategori, 'kategoriSelected' => $id_kategori]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
+    // get nama user
+    public function getNamaUser()
     {
-        // dd($id_user);
+        // nama user
+        $nama_user = Auth::user()->nama_siswa;
+        return Response()->json(['data' => $nama_user, 'message' => 'Data berhasil diambil'], 200);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -95,14 +62,6 @@ class DashboardController extends Controller
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
     }
-
-    public function getBarangByKategori($id_kategori) {
-        $id_user = Auth::user()->id_siswa;
-        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori',$id_kategori)->get();
-        $kategori = Kategori::all();
-
-        return Response()->json(['barang' => $barang, 'kategori' => $kategori, 'kategoriSelected' => $id_kategori]);
-    }
     
     public function getBarangByKeywordKategori($id_kategori, $keyword) {
         $id_user = Auth::user()->id_siswa;
@@ -119,5 +78,4 @@ class DashboardController extends Controller
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
     }
-
 }

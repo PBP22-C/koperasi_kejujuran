@@ -52,5 +52,8 @@ Route::middleware(['auth', 'revalidate'])->group(function(){
     Route::get('/dashboard/getData/kategori/{idKategori}', 'App\Http\Controllers\DashboardController@getBarangByKategori');
     Route::get('/dashboard/getData/kategori/{idKategori}/keyword/{keyword}', 'App\Http\Controllers\DashboardController@getBarangByKeywordKategori');
     Route::get('/dashboard/getData/keyword/{keyword}', 'App\Http\Controllers\DashboardController@getBarangByKeyword');
-});
 
+    Route::get('/name', 'App\Http\Controllers\DashboardController@getNamaUser'); 
+    Route::post('/dashboard/withdraw', 'App\Http\Controllers\TransaksiWithdrawController@withdraw');
+    Route::post('/dashboard/buy', 'App\Http\Controllers\TransaksiBeliController@store');
+});

@@ -1,9 +1,59 @@
-<div id="informasi-barang" style="display: none;" class="bg-dark p-2 card">
-    <h1>Deskripsi Barang</h1>
-    <img src="" id="foto-barang" class="text-white" alt="" height="250" width="300" style="object-fit:contain;">
+<div id="informasi-barang" style="display: none; width:450px;" class="bg-dark p-2 card">
+    <h3>Deskripsi Barang</h3>
+    <img src="" id="foto-barang" class="text-white" alt="" height="250" style="object-fit:contain;">
     <h2 id="nama-barang" class=""></h2>
     <p id="deskripsi-barang"></p>
     <div id="stok" class="text-secondary"></div>
-    <h2 id="harga-barang" class="mb-2"></h2>
-    <button id="beli" class="btn btn-warning text-white"><i class="fa-solid fa-cart-shopping me-1"></i><span>Beli</span></button>
+    <h2 id="harga-barang"></h2>
+    <button type="button" onclick="showBuy()" class="btn btn-warning text-white" id="beli"><i class="fa-solid fa-cart-shopping me-1 fs-4"></i> Beli</button>
+
+    <form id="buyProduct">
+        <input type="hidden" name="id_barang" id="id_barang">
+        <div>
+            <label for="harga">Harga</label>
+            <input type="number" name="harga" id="harga" min="1">
+        </div>
+        <div><label for="kuantitas">Jumlah Barang</label>
+            <input type="number" name="kuantitas" id="kuantitas" min="1">
+        </div>
+        <button type="submit" id="beli">Beli</button>
+    </form>
 </div>
+
+<script>
+    $('#buyProduct').on('submit', function(e) {
+        e.preventDefault();
+        const harga_total = $('#harga').val();
+        const kuantitas = $('#kuantitas').val();
+        const id_barang = $('#id_barang').val();
+        const url = `{{ url('/dashboard/buy') }}`;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                harga_total: harga_total,
+                kuantitas: kuantitas,
+                id_barang: id_barang
+            },
+            dataType: 'json',
+            success: function(res) {
+                loadData();
+                showListBarang();
+                getSaldo();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+    function showBuy() {
+        resetModal();
+        $('#modalBuy').modal('show');
+        $('#modalFotoBarang').attr('src', $('#foto-barang').attr('src'));
+        $('#modalNamaBarang').text($('#nama-barang').text());
+        $('#modalHargaBarang').text($('#harga-barang').text());
+        $('#modalBuyTitle').html('Checkout');
+        $('#modalStokBarang').text($('#stok').text());
+        $('#submitBuyButton').html('Checkout');
+    }
+</script>

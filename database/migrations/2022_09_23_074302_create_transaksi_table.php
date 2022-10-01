@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id('id_transaksi');
-            $table->char('id_siswa', 6)->unique();
+            $table->char('id_siswa', 6);
             $table->timestamp('waktu_transaksi');
             $table->integer('saldo_akhir');
-            
+
             $table->foreign('id_siswa', 'fk_id_siswa')->references('id_siswa')->on('siswa');
         });
     }
