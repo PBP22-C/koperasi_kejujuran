@@ -48,20 +48,16 @@
         $('#informasi-barang').show();
         $('#nama-barang').html(barang[id].nama_barang);
         $('#deskripsi-barang').html(barang[id].deskripsi);
-        $('#stok').html("stok : " + barang[id].stok); <<
-        << << < HEAD
+        $('#stok').html("stok : " + barang[id].stok);
         $('#harga-barang').html("Rp" + barang[id].harga);
-        $('#foto-barang').attr('src', `{{ asset('images/${barang[id].foto}') }}`); ===
-        === =
         $('#harga-barang').html("Rp" + barang[id].harga);
         if (barang[id].foto == null) {
             $('#foto-barang').attr('src',
                 'https://static.wikia.nocookie.net/find-the-markers-roblox/images/5/5f/Placeholder.jpg/revision/latest?cb=20220313030844'
-                );
+            );
         } else {
             $('#foto-barang').attr('src', `{{ asset('images/${barang[id].foto}') }}`);
-        } >>>
-        >>> > acd921d4b85c6ac5b876723ac9629df63d47dff5
+        }
         $('#foto-barang').attr('alt', barang[id].nama_barang);
         $('#id_barang').val(barang[id].id_barang);
     }

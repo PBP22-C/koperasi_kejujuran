@@ -28,4 +28,6 @@ class Barang extends Model
     {
         return $this->belongsTo(Siswa::class, 'id_siswa_penjual');
     }
+
+    public $timestamps = false;
 }

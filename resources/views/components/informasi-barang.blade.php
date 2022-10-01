@@ -6,10 +6,15 @@
     <div id="stok" class="text-secondary"></div>
     <h2 id="harga-barang"></h2>
 
-    <form action="/dashboard/buy" id="buyProduct">
+    <form id="buyProduct">
         <input type="hidden" name="id_barang" id="id_barang">
-        <input type="number" name="harga" id="harga" min="1">
-        <input type="number" name="kuantitas" id="kuantitas" min="1">
+        <div>
+            <label for="harga">Harga</label>
+            <input type="number" name="harga" id="harga" min="1">
+        </div>
+        <div><label for="kuantitas">Jumlah Barang</label>
+            <input type="number" name="kuantitas" id="kuantitas" min="1">
+        </div>
         <button type="submit" id="beli">Beli</button>
     </form>
 </div>
@@ -31,8 +36,9 @@
             },
             dataType: 'json',
             success: function(res) {
-                console.log(res);
-                showBarang();
+                loadData();
+                showListBarang();
+                getSaldo();
             },
             error: function(err) {
                 console.log(err);
