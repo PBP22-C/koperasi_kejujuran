@@ -5,82 +5,32 @@ namespace App\Http\Controllers;
 use App\Models\TransaksiBeli;
 use App\Http\Requests\StoreTransaksiBeliRequest;
 use App\Http\Requests\UpdateTransaksiBeliRequest;
+use App\Models\Barang;
+use Illuminate\Http\Request;
 
 class TransaksiBeliController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreTransaksiBeliRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTransaksiBeliRequest $request)
+    public function store(Request $request)
     {
-        //
-    }
+        $data = new TransaksiBeli();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TransaksiBeli  $transaksi_beli
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TransaksiBeli $transaksi_beli)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TransaksiBeli  $transaksi_beli
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TransaksiBeli $transaksi_beli)
-    {
-        //
-    }
+        $data->id_barang = $request->id_barang;
+        $data->kuantitas = $request->kuantitas;
+        $data->harga_total = $request->harga_total;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTransaksiBeliRequest  $request
-     * @param  \App\Models\TransaksiBeli  $transaksi_beli
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTransaksiBeliRequest $request, TransaksiBeli $transaksi_beli)
-    {
-        //
-    }
+        $data->save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TransaksiBeli  $transaksi_beli
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TransaksiBeli $transaksi_beli)
-    {
-        //
+        Barang::where('id', $request->id_barang)->delete();
+        return response()->json([
+            'message' => 'success',
+            'data' => $data
+        ], 200);
     }
 }

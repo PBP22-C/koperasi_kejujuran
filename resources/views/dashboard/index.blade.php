@@ -1,6 +1,6 @@
 <x-layout>
     <div id="listKategori" class="d-flex flex-wrap justify-content-center gap-3 "></div>
-        
+
     <div class="d-flex justify-content-between">
         <div id="listBarang" class="d-flex flex-wrap justify-content-center gap-3"></div>
         <x-informasi-barang></x-informasi-barang>
@@ -37,9 +37,10 @@
         $('#nama-barang').html(barang[id].nama_barang);
         $('#deskripsi-barang').html(barang[id].deskripsi);
         $('#stok').html("stok : " + barang[id].stok);
-        $('#harga-barang').html("Rp"+barang[id].harga);
+        $('#harga-barang').html("Rp" + barang[id].harga);
         $('#foto-barang').attr('src', `{{ asset('images/${barang[id].foto}') }}`);
         $('#foto-barang').attr('alt', barang[id].nama_barang);
+        $('#id_barang').val(barang[id].id_barang);
     }
 
     function showListBarang() {
@@ -47,20 +48,20 @@
         // Show all category button
         let elementKategori = ``;
         for (let i = 0; i < kategori.length; i++) {
-            elementKategori += 
-            `
+            elementKategori +=
+                `
             <button onclick="filterByKategori(${kategori[i].id_kategori})">${kategori[i].nama_kategori}</button>
             `
         }
-        
+
         $('#listKategori').html(elementKategori);
-        
+
 
         // Show all barang yang bisa dibeli
         let elementBarang = ``;
         for (let i = 0; i < barang.length; i++) {
             const item = barang[i];
-            elementBarang += 
+            elementBarang +=
                 `
                 <div class="card bg-dark border-light" style="width: 18rem;">
                     <img src="/images/${item.foto}" class="card-img-top text-white" alt="${item.nama_barang}" height="250" style="object-fit:cover;">
