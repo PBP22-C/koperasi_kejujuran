@@ -12,19 +12,19 @@
                 <p id="modalStokBarang" class="p-0 m-0 text-white"></p>
                 <h4  id="modalHargaBarang" class="p-0 m-0 text-white"></h4>
             </div>
-            <form id="formBeli" class="bg-dark text-light" enctype="multipart/form-data">
+            <form id="formBeli" class="bg-dark text-light">
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <div class="mb-3">
-                        <input type="hidden" name="id_siswa" id="id_siswa" value="{{ Auth::user()->id_siswa }}">
+                        <input type="hidden" name="modalIdBarang" id="modalIdBarang" />
                         <label for="kuantitas" class="form-label">Jumlah Barang <span class="text-danger">*</span></label>
-                        <input name="kuantitas" type="number" class="form-control" id="kuantitas" min="0"
-                            required>
+                        <input name="kuantitas" type="number" class="form-control" id="kuantitas" min="1"
+                            required />
                         <label for="harga" class="form-label">Harga <span class="text-danger">*</span></label>
                         <input name="harga" type="number" class="form-control" id="harga" min="0"
-                            required>
+                            required />
                     </div>
-                    <div id="errorField" class="text-danger"></div>
+                    <div id="errorModalBuy" class="text-danger"></div>
                 </div>
                 <div class="modal-footer border-top-0">
                     <button class="btn btn-outline-danger" data-bs-dismiss="modal" type="button">
@@ -40,26 +40,29 @@
 <script>
      $('#formBeli').on('submit', function(e) {
         e.preventDefault();
-        const harga_total = $('#harga').val();
+        const hargaTotal = $('#harga').val();
         const kuantitas = $('#kuantitas').val();
-        const id_barang = $('#id_barang').val();
+        const idBarang = $('#modalIdBarang').val();
+        console.log(idBarang);
         const url = `{{ url('/dashboard/buy') }}`;
         $.ajax({
             type: "POST",
             url: url,
             data: {
-                harga_total: harga_total,
-                kuantitas: kuantitas,
-                id_barang: id_barang
+                harga_total: hargaTotal,
+                kuantitas,
+                id_barang: idBarang,
             },
             dataType: 'json',
             success: function(res) {
                 loadData();
                 showListBarang();
                 getSaldo();
+                $('#modalBuy').modal('hide');
             },
             error: function(err) {
                 console.log(err);
+                $('#errorModalBuy').html(err.responseJSON.message);
             }
         });
     });

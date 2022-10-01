@@ -47,7 +47,7 @@ class TransaksiBeliController extends Controller
         $data->id_beli = $idTransaksi;
         $data->id_barang = $request->id_barang;
         $data->kuantitas = $request->kuantitas;
-        $data->harga_total = $request->harga_total;
+        $data->harga_total = $harga_total;
         $data->save();
 
         Barang::where('id_barang', $request->id_barang)->update([

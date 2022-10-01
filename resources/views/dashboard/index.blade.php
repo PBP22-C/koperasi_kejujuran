@@ -4,7 +4,7 @@
             <input type="text" oninput="getBarangByKeyword(this.value)" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
         </div>
         <div class="col-6 my-auto">
-            <i class="fa-solid fa-bell col-6"></i>
+            <i class="fa-solid fa-search col-6"></i>
         </div>
     </div>
     <h1 class="text-white mb-3">Koperasi Kejujuran</h1>
@@ -55,7 +55,7 @@
             $('#foto-barang').attr('src', `{{ asset('images/${barang[id].foto}') }}`);
         }
         $('#foto-barang').attr('alt', barang[id].nama_barang);
-        $('#id_barang').val(barang[id].id_barang);
+        $('#modalIdBarang').val(barang[id].id_barang);
     }
 
     function getBarangByKategori(idKategori) {

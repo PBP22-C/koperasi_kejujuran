@@ -22,8 +22,8 @@
                             <i class="fa-solid fa-sack-xmark fs-4 me-1"></i> <span class="ms-1 d-none d-sm-inline">My
                                 Items</span> </a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                    {{--<li>
+                         <a href="#" class="nav-link px-0 align-middle">
                             <i class="fa-solid fa-cart-shopping me-1 fs-4"></i><span
                                 class="ms-1 d-none d-sm-inline">Orders</span></a>
                     </li>
@@ -32,7 +32,7 @@
                             <i class="fa-solid fa-tag fs-4 me-1"></i> <span class="ms-1 d-none d-sm-inline">My
                                 Transactions</span></a>
 
-                    </li>
+                    </li> --}}
                 </ul>
                 <div class="box-price">
                     <i class="fa-solid fa-cash-register fs-1 mb-3"></i>
@@ -87,15 +87,12 @@
     }
 
     function showWithdraw() {
-        resetModal();
+        $('#withdraw').val('');
         $('#modalWithdraw').modal('show');
         $('#modalWithdrawTitle').html('Withdraw');
         $('#submitWitdraw').html('Tarik Uang');
     }
 
-    function resetModal() {
-        $('#jmlUang').val('');
-    }
 </script>
 
 

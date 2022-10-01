@@ -20,7 +20,7 @@
                         <input name="withdraw" type="number" class="form-control" id="withdraw" min="0"
                             required>
                     </div>
-                    <div id="errorField" class="text-danger"></div>
+                    <div id="errorModalWithdraw" class="text-danger"></div>
                 </div>
                 <div class="modal-footer border-top-0">
                     <button class="btn btn-outline-danger" data-bs-dismiss="modal" type="button">
@@ -55,6 +55,10 @@
                 $('#saldoModal').html(res.data.saldoAkhir);
                 $('#saldo').html(res.data.saldoAkhir);
                 $('#modalWithdraw').modal('hide');
+            },
+            error: function(err) {
+                console.log(err);
+                $('#errorModalWithdraw').html(err.responseJSON.message);
             }
         });
     });
