@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Siswa;
+use App\Models\Transaksi;
 use App\Models\TransaksiWithdraw;
-use App\Http\Requests\StoreTransaksiWithdrawRequest;
-use App\Http\Requests\UpdateTransaksiWithdrawRequest;
+use Illuminate\Http\Request;
 
 class TransaksiWithdrawController extends Controller
 {
@@ -13,74 +14,38 @@ class TransaksiWithdrawController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function withdraw(Request $request)
     {
-        //
-    }
+        $data = new TransaksiWithdraw();
+        $dataTransaksi = new TransaksiController();
+        $saldoSiswa = Siswa::where('id_siswa', $request->id_siswa)->first()->saldo;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        if ($request->withdraw > $saldoSiswa) {
+            return Response()->json(['message' => 'Saldo tidak mencukupi'], 400);
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTransaksiWithdrawRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTransaksiWithdrawRequest $request)
-    {
-        //
-    }
+        $saldo = 0;
+        $idTransaksi = 1;
+        $lastTransaksi = Transaksi::orderBy('id_transaksi', 'desc')->first();
+        if ($lastTransaksi != null) {
+            $saldo = $lastTransaksi->saldo_akhir;
+            $idTransaksi = $lastTransaksi->id_transaksi + 1;
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TransaksiWithdraw  $transaksi_withdraw
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TransaksiWithdraw $transaksi_withdraw)
-    {
-        //
-    }
+        $request->harga_total = $saldo - $request->withdraw;
+        $dataTransaksi->store($request);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TransaksiWithdraw  $transaksi_withdraw
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TransaksiWithdraw $transaksi_withdraw)
-    {
-        //
-    }
+        $data->id_withdraw = $idTransaksi;
+        $data->jumlah_withdraw = $request->withdraw;
+        $data->save();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTransaksiWithdrawRequest  $request
-     * @param  \App\Models\TransaksiWithdraw  $transaksi_withdraw
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTransaksiWithdrawRequest $request, TransaksiWithdraw $transaksi_withdraw)
-    {
-        //
-    }
+        Siswa::where('id_siswa', $request->id_siswa)->update([
+            'saldo' => $saldoSiswa - $request->withdraw
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TransaksiWithdraw  $transaksi_withdraw
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TransaksiWithdraw $transaksi_withdraw)
-    {
-        //
+        return Response()->json(['message' => 'Withdraw berhasil', 'data' => [
+            'saldoAkhir' => $request->harga_total,
+            'saldoSiswa' => $saldoSiswa - $request->withdraw,
+        ]], 200);
     }
 }

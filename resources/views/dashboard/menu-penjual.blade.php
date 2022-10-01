@@ -28,8 +28,6 @@
             </option>
         @endforeach
     </x-modal>
-
-    <x-modalWithdraw></x-modalWithdraw>
 </x-layout>
 
 {{-- AJAX --}}

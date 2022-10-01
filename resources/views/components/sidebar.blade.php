@@ -8,7 +8,7 @@
                         class="rounded-circle">
                     <h3 class="" id="user-name"></h3>
                 </div>
-                <div>Saldo: {{ Auth::user()->saldo }}</div>
+                <div id="saldoSiswa">Saldo: {{ Auth::user()->saldo }}</div>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                     id="menu">
                     <li class="nav-item">

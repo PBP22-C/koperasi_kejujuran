@@ -15,6 +15,7 @@
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <div class="mb-3">
+                        <input type="hidden" name="id_siswa" id="id_siswa" value="{{ Auth::user()->id_siswa }}">
                         <label for="withdraw" class="form-label">Jumlah Uang <span class="text-danger">*</span></label>
                         <input name="withdraw" type="number" class="form-control" id="withdraw" min="0"
                             required>
@@ -39,7 +40,7 @@
         $('#submitButton').attr('disabled', true);
         const form = new FormData(this);
         form.append('withdraw', $('#withdraw').val());
-        const url = '/withdraw';
+        const url = '/dashboard/withdraw';
         $.ajax({
             type: "POST",
             url: url,
@@ -50,9 +51,10 @@
             data: form,
             dataType: 'json',
             success: function(res) {
-                console.log(res);
+                $('#saldoSiswa').html(`Saldo: ${res.data.saldoSiswa}`);
+                $('#saldoModal').html(res.data.saldoAkhir);
+                $('#saldo').html(res.data.saldoAkhir);
                 $('#modalWithdraw').modal('hide');
-                // resetModal();
             }
         });
     });

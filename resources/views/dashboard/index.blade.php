@@ -15,8 +15,6 @@
         <div id="listBarang" class="d-flex flex-wrap justify-content-center gap-3"></div>
         <x-informasi-barang></x-informasi-barang>
     </div>
-    
-    {{-- <x-modalWithdraw></x-modalWithdraw> --}}
 </x-layout>
 
 
