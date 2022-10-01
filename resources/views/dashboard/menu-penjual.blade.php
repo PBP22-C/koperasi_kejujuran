@@ -9,21 +9,11 @@
         </div>
     </div>
     <div class="container my-5">
-<<<<<<< HEAD
-        <a href="/logout" class="btn btn-danger">Logout</a>
         <div>Saldo: {{ Auth::user()->saldo }}</div>
         <button type="button" onclick="showWithdraw()" data-bs-toggle="modal" data-bs-target="#">Withdraw</button>
-        <h2>{{ Auth::user()->id_siswa }}</h2>
         <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4 bg">
             <h1 class="text-white">List Barang</h1>
             <button onclick="showTambah()" type="button" class="btn btn-primary" data-bs-toggle="modal"
-=======
-        <h2>Saldo Anda: {{ Auth::user()->saldo }}</h2>
-        
-        <div class="d-flex flex-wrap  align-items-center gap-3 mb-4 bg">
-            <h1 class="text-white justify-content-start me-auto p-2">List Barang</h1>
-            <button onclick="showTambah()" type="button" class="btn btn-primary p-2" data-bs-toggle="modal"
->>>>>>> eb7da6b1e77667e1f92336d729752ba50411ab2d
                 data-bs-target="#tambahBarang">
                 Tambah Barang
             </button>

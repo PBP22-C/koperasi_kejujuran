@@ -38,7 +38,7 @@
                     <i class="fa-solid fa-cash-register fs-1 mb-3"></i>
                     <h5 class="text-white">Total Saldo</h5>
                     <h4  id="saldo" class="text-white"></h3>
-                    <button class="btn btn-success">Withdraw</button>
+                    <button class="btn btn-success" onclick="showWithdraw()" data-bs-toggle="modal" data-bs-target="#">Withdraw</button>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     <a href="/logout" class="btn btn-danger">Logout</a>
@@ -54,6 +54,7 @@
             </main>
         </div>
     </div>
+    <x-modalWithdraw></x-modalWithdraw>
 </div>
 
 <script>
@@ -82,6 +83,13 @@
                 $('#user-name').html(name);
             }
         });
+    }
+
+    function showWithdraw() {
+        // resetModal();
+        $('#modalWithdraw').modal('show');
+        $('#modalWithdrawTitle').html('Withdraw');
+        $('#submitWitdraw').html('Tarik Uang');
     }
 </script>
 
