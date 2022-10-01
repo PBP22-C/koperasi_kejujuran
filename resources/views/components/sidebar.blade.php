@@ -70,6 +70,7 @@
             success: function(res) {
                 const saldo = res.data;
                 $('#saldo').html(saldo);
+                $('#saldoModal').html(saldo);
             }
         });
     }
@@ -86,10 +87,14 @@
     }
 
     function showWithdraw() {
-        // resetModal();
+        resetModal();
         $('#modalWithdraw').modal('show');
         $('#modalWithdrawTitle').html('Withdraw');
         $('#submitWitdraw').html('Tarik Uang');
+    }
+
+    function resetModal() {
+        $('#jmlUang').val('');
     }
 </script>
 

@@ -9,15 +9,15 @@
             <div class="box-price">
                 <i class="fa-solid fa-cash-register fs-1 mb-3"></i>
                 <h5 class="text-white">Total Saldo</h5>
-                <h4  id="saldo" class="text-white"></h3>
+                <h4  id="saldoModal" class="text-white"></h3>
             </div>
             <form id="formWithdraw" class="bg-dark text-light" enctype="multipart/form-data">
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <input type="hidden" name="id_barang" id="id_barang"> <br />
                     <div class="mb-3">
-                        <label for="harga" class="form-label">Jumlah Uang <span class="text-danger">*</span></label>
-                        <input name="harga" type="number" class="form-control" id="harga" min="0"
+                        <label for="jmlUang" class="form-label">Jumlah Uang <span class="text-danger">*</span></label>
+                        <input name="jmlUang" type="number" class="form-control" id="jmlUang" min="0"
                             required>
                     </div>
                     <div id="errorField" class="text-danger"></div>
@@ -32,20 +32,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).onload(function() {
-        getSaldo();
-    });
-    function getSaldo() {
-        $.ajax({
-            type: "GET",
-            url: `{{ url('/saldo') }}`,
-            dataType: 'json',
-            success: function(res) {
-                const saldo = res.data;
-                $('#saldo').html(saldo);
-            }
-        });
-    }
-</script>
