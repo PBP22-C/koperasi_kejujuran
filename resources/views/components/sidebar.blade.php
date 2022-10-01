@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark position-fixed">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
 
                 <div class="container d-flex flex-column align-items-center justify-content-center gap-2">
@@ -38,13 +38,16 @@
                     <h5 class="text-white">Total Saldo</h5>
                     <h4  id="saldo" class="text-white"></h3>
                 </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <a href="/logout" class="btn btn-danger">Logout</a>
+                </div>
                 <hr>
 
 
             </div>
         </div>
         <div class="col py-3">
-            <main>
+            <main class="main">
                 {{ $slot }}
             </main>
         </div>

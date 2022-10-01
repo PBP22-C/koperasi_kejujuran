@@ -12,7 +12,7 @@
 
     <div id="listKategori" class="d-flex flex-wrap justify-content-start gap-3 mb-3"></div>
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-start">
         <div id="listBarang" class="d-flex flex-wrap justify-content-center gap-3"></div>
         <x-informasi-barang></x-informasi-barang>
     </div>
@@ -48,9 +48,20 @@
         $('#informasi-barang').show();
         $('#nama-barang').html(barang[id].nama_barang);
         $('#deskripsi-barang').html(barang[id].deskripsi);
-        $('#stok').html("stok : " + barang[id].stok);
+        $('#stok').html("stok : " + barang[id].stok); <<
+        << << < HEAD
         $('#harga-barang').html("Rp" + barang[id].harga);
-        $('#foto-barang').attr('src', `{{ asset('images/${barang[id].foto}') }}`);
+        $('#foto-barang').attr('src', `{{ asset('images/${barang[id].foto}') }}`); ===
+        === =
+        $('#harga-barang').html("Rp" + barang[id].harga);
+        if (barang[id].foto == null) {
+            $('#foto-barang').attr('src',
+                'https://static.wikia.nocookie.net/find-the-markers-roblox/images/5/5f/Placeholder.jpg/revision/latest?cb=20220313030844'
+                );
+        } else {
+            $('#foto-barang').attr('src', `{{ asset('images/${barang[id].foto}') }}`);
+        } >>>
+        >>> > acd921d4b85c6ac5b876723ac9629df63d47dff5
         $('#foto-barang').attr('alt', barang[id].nama_barang);
         $('#id_barang').val(barang[id].id_barang);
     }
@@ -90,7 +101,7 @@
             elementBarang +=
                 `
                 <div class="card bg-dark border-light" style="width: 18rem;">
-                    <img src="/images/${item.foto}" class="card-img-top text-white" alt="${item.nama_barang}" height="250" style="object-fit:cover;">
+                    <img src="${item.foto ? `/images/${item.foto}` : 'https://static.wikia.nocookie.net/find-the-markers-roblox/images/5/5f/Placeholder.jpg/revision/latest?cb=20220313030844'}" class="card-img-top text-white" alt="${item.nama_barang}" height="250" style="object-fit:cover;">
                     <div class="card-body">
                         <h5 class="card-title mb-0 text-white fw-bold">${item.nama_barang}</h5>
                         <br>
