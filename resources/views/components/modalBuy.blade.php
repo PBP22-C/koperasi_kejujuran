@@ -16,7 +16,7 @@
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <div class="mb-3">
-                        <input type="hidden" name="modalIdBarang" id="modalIdBarang">
+                        <input type="hidden" name="modalIdBarang" id="modalIdBarang" />
                         <label for="kuantitas" class="form-label">Jumlah Barang <span class="text-danger">*</span></label>
                         <input name="kuantitas" type="number" class="form-control" id="kuantitas" min="1"
                             required />
@@ -43,6 +43,7 @@
         const hargaTotal = $('#harga').val();
         const kuantitas = $('#kuantitas').val();
         const idBarang = $('#modalIdBarang').val();
+        console.log(idBarang);
         const url = `{{ url('/dashboard/buy') }}`;
         $.ajax({
             type: "POST",

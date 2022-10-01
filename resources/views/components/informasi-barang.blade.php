@@ -12,7 +12,6 @@
     function showBuy() {
         $('#harga').val('');
         $('#kuantitas').val('');
-        $('#modalIdBarang').val('');
         $('#modalBuy').modal('show');
         $('#modalFotoBarang').attr('src', $('#foto-barang').attr('src'));
         $('#modalNamaBarang').text($('#nama-barang').text());
