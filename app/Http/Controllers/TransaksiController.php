@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use App\Http\Requests\StoreTransaksiRequest;
 use App\Http\Requests\UpdateTransaksiRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
@@ -27,24 +29,23 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreTransaksiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTransaksiRequest $request)
+    public function store(Request $request)
     {
-        //
+        $userId = Auth::user()->id_siswa;
+        $data = new Transaksi();
+        $data->id_siswa = $userId;
+        $data->saldo_akhir = $request->harga_total;
+
+        $data->save();
+        return response()->json([
+            'message' => 'success',
+            'data' => $data
+        ], 200);
     }
 
     /**

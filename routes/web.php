@@ -32,7 +32,7 @@ Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 
 
 // Route::get('/', 'App\Http\Controllers\MenuPenjualController@index');
-Route::middleware(['auth', 'revalidate'])->group(function(){
+Route::middleware(['auth', 'revalidate'])->group(function () {
     Route::get('/dashboard/menu-penjual', 'App\Http\Controllers\MenuPenjualController@index');
     Route::get('/dashboard/menu-penjual/create', 'App\Http\Controllers\MenuPenjualController@create');
     Route::post('/dashboard/menu-penjual/store', 'App\Http\Controllers\MenuPenjualController@store');
@@ -42,10 +42,9 @@ Route::middleware(['auth', 'revalidate'])->group(function(){
     Route::get('/dashboard/menu-penjual/show', 'App\Http\Controllers\MenuPenjualController@show');
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
     Route::get('/dashboard/getData', 'App\Http\Controllers\DashboardController@getData');
-    Route::post('/dashboard/buy', 'App\Http\Controllers\DashboardController@buy');
     Route::get('/saldo', 'App\Http\Controllers\TransaksiController@saldo');
     Route::get('/dashboard/getData/{idKategori}', 'App\Http\Controllers\DashboardController@getBarangByKategori');
     Route::get('/name', 'App\Http\Controllers\DashboardController@getNamaUser'); 
     Route::post('/dashboard/withdraw', 'App\Http\Controllers\TransaksiWithdrawController@withdraw');
+    Route::post('/dashboard/buy', 'App\Http\Controllers\TransaksiBeliController@store');
 });
-

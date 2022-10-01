@@ -5,82 +5,62 @@ namespace App\Http\Controllers;
 use App\Models\TransaksiBeli;
 use App\Http\Requests\StoreTransaksiBeliRequest;
 use App\Http\Requests\UpdateTransaksiBeliRequest;
+use App\Models\Barang;
+use App\Models\Siswa;
+use App\Models\Transaksi;
+use Illuminate\Http\Request;
 
 class TransaksiBeliController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreTransaksiBeliRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTransaksiBeliRequest $request)
+    public function store(Request $request)
     {
-        //
-    }
+        $barang = Barang::where('id_barang', $request->id_barang)->first();
+        $stok = $barang->stok;
+        $idSiswa = $barang->id_siswa_penjual;
+        $data = new TransaksiBeli();
+        $dataTransaksi = new TransaksiController();
+        $saldoSiswa = Siswa::where('id_siswa', $idSiswa)->first()->saldo;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TransaksiBeli  $transaksi_beli
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TransaksiBeli $transaksi_beli)
-    {
-        //
-    }
+        if ($request->kuantitas > $stok) {
+            return Response()->json(['message' => 'Stok tidak mencukupi'], 400);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TransaksiBeli  $transaksi_beli
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TransaksiBeli $transaksi_beli)
-    {
-        //
-    }
+        $saldo = 0;
+        $idTransaksi = 1;
+        $lastTransaksi = Transaksi::orderBy('id_transaksi', 'desc')->first();
+        if ($lastTransaksi != null) {
+            $saldo = $lastTransaksi->saldo_akhir;
+            $idTransaksi = $lastTransaksi->id_transaksi + 1;
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTransaksiBeliRequest  $request
-     * @param  \App\Models\TransaksiBeli  $transaksi_beli
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTransaksiBeliRequest $request, TransaksiBeli $transaksi_beli)
-    {
-        //
-    }
+        $harga_total = $request->harga_total;
+        $request->harga_total += $saldo;
+        $dataTransaksi->store($request);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TransaksiBeli  $transaksi_beli
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TransaksiBeli $transaksi_beli)
-    {
-        //
+
+        $data->id_beli = $idTransaksi;
+        $data->id_barang = $request->id_barang;
+        $data->kuantitas = $request->kuantitas;
+        $data->harga_total = $request->harga_total;
+        $data->save();
+
+        Barang::where('id_barang', $request->id_barang)->update([
+            'stok' => $stok - $request->kuantitas
+        ]);
+
+        Siswa::where('id_siswa', $idSiswa)->update([
+            'saldo' => $saldoSiswa + $harga_total
+        ]);
+
+        return response()->json([
+            'message' => 'success',
+            'data' => $data
+        ], 200);
     }
 }
