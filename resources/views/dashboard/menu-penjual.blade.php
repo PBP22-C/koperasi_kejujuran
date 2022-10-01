@@ -9,10 +9,8 @@
         </div>
     </div>
     <div class="container my-5">
-        <div>Saldo: {{ Auth::user()->saldo }}</div>
-        <button type="button" onclick="showWithdraw()" data-bs-toggle="modal" data-bs-target="#">Withdraw</button>
-        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4 bg">
-            <h1 class="text-white">List Barang</h1>
+        <div class="d-flex flex-wrap align-items-center gap-3 mb-4 bg">
+            <h1 class="text-white justify-content-between me-auto">List Barang</h1>
             <button onclick="showTambah()" type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#tambahBarang">
                 Tambah Barang

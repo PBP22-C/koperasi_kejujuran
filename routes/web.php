@@ -44,6 +44,7 @@ Route::middleware(['auth', 'revalidate'])->group(function () {
     Route::get('/dashboard/getData', 'App\Http\Controllers\DashboardController@getData');
     Route::get('/saldo', 'App\Http\Controllers\TransaksiController@saldo');
     Route::get('/dashboard/getData/{idKategori}', 'App\Http\Controllers\DashboardController@getBarangByKategori');
+    Route::get('/name', 'App\Http\Controllers\DashboardController@getNamaUser'); 
+    Route::post('/dashboard/withdraw', 'App\Http\Controllers\TransaksiWithdrawController@withdraw');
     Route::post('/dashboard/buy', 'App\Http\Controllers\TransaksiBeliController@store');
-    Route::get('/name', 'App\Http\Controllers\DashboardController@getNamaUser');
 });

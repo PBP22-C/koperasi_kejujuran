@@ -14,10 +14,9 @@
             <form id="formWithdraw" class="bg-dark text-light" enctype="multipart/form-data">
                 <div class="modal-body">
                     {{ csrf_field() }}
-                    <input type="hidden" name="id_barang" id="id_barang"> <br />
                     <div class="mb-3">
-                        <label for="jmlUang" class="form-label">Jumlah Uang <span class="text-danger">*</span></label>
-                        <input name="jmlUang" type="number" class="form-control" id="jmlUang" min="0"
+                        <label for="withdraw" class="form-label">Jumlah Uang <span class="text-danger">*</span></label>
+                        <input name="withdraw" type="number" class="form-control" id="withdraw" min="0"
                             required>
                     </div>
                     <div id="errorField" class="text-danger"></div>
@@ -32,3 +31,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    $("#formWithdraw").on('submit', function(e) {
+        e.preventDefault();
+        $('#submitButton').html('Loading...');
+        $('#submitButton').attr('disabled', true);
+        const form = new FormData(this);
+        form.append('withdraw', $('#withdraw').val());
+        const url = '/withdraw';
+        $.ajax({
+            type: "POST",
+            url: url,
+            enctype: 'multipart/form-data',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: form,
+            dataType: 'json',
+            success: function(res) {
+                console.log(res);
+                $('#modalWithdraw').modal('hide');
+                // resetModal();
+            }
+        });
+    });
+</script>
