@@ -4,10 +4,11 @@
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
 
                 <div class="container d-flex flex-column align-items-center justify-content-center gap-2">
-                    <img src="https://github.com/mdo.png" alt="hugenerd" width="90" height="90"
+                    <img src="https://avatars.githubusercontent.com/u/114212348?s=200&v=4" alt="hugenerd" width="90" height="90"
                         class="rounded-circle">
                     <h3 class="" id="user-name"></h3>
                 </div>
+                <div>Saldo: {{ Auth::user()->saldo }}</div>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                     id="menu">
                     <li class="nav-item">
@@ -37,6 +38,7 @@
                     <i class="fa-solid fa-cash-register fs-1 mb-3"></i>
                     <h5 class="text-white">Total Saldo</h5>
                     <h4  id="saldo" class="text-white"></h3>
+                    <button class="btn btn-success">Withdraw</button>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     <a href="/logout" class="btn btn-danger">Logout</a>
