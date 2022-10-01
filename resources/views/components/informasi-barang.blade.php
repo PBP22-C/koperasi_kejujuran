@@ -5,6 +5,7 @@
     <p id="deskripsi-barang"></p>
     <div id="stok" class="text-secondary"></div>
     <h2 id="harga-barang"></h2>
+    <button type="button" onclick="showBuy()" class="btn btn-warning text-white" id="beli"><i class="fa-solid fa-cart-shopping me-1 fs-4"></i> Beli</button>
 
     <form id="buyProduct">
         <input type="hidden" name="id_barang" id="id_barang">
@@ -45,4 +46,14 @@
             }
         });
     });
+    function showBuy() {
+        resetModal();
+        $('#modalBuy').modal('show');
+        $('#modalFotoBarang').attr('src', $('#foto-barang').attr('src'));
+        $('#modalNamaBarang').text($('#nama-barang').text());
+        $('#modalHargaBarang').text($('#harga-barang').text());
+        $('#modalBuyTitle').html('Checkout');
+        $('#modalStokBarang').text($('#stok').text());
+        $('#submitBuyButton').html('Checkout');
+    }
 </script>
