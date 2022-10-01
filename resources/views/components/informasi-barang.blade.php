@@ -1,4 +1,4 @@
-<div id="informasi-barang" style="display: none;" class="bg-dark p-2">
+<div id="informasi-barang" style="display: none;" class="bg-dark p-2 card">
     <h1>Deskripsi Barang</h1>
     <img src="" id="foto-barang" class="card-img-top text-white" alt="" height="250"
         style="object-fit:cover;">

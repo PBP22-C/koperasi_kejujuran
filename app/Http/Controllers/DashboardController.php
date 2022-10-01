@@ -97,10 +97,21 @@ class DashboardController extends Controller
     }
 
     public function getBarangByKategori($id_kategori) {
-        $id_user = '12456';
+        $id_user = Auth::user()->id_siswa;
         $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori',$id_kategori)->get();
         $kategori = Kategori::all();
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
+    }
+    // get nama user
+    public function getNamaUser() {
+        // nama user
+        $nama_user = Auth::user()->nama_siswa;
+
+        
+
+        
+
+        return Response()->json(['data' => $nama_user, 'message' => 'Data berhasil diambil'], 200);
     }
 }
