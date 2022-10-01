@@ -42,7 +42,7 @@ class AuthController extends Controller
 
         $request->validate([
             'nama_siswa' => 'required',
-            'id_siswa' => 'required',
+            'id_siswa' => 'required|unique:Siswa',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
         ]);

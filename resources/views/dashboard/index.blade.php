@@ -1,6 +1,6 @@
 <x-layout>
     <div id="listKategori" class="d-flex flex-wrap justify-content-center gap-3 "></div>
-        
+    <input type="text" id="keyword-search-input" oninput="getBarangByKeyword(this.value)">
     <div class="d-flex justify-content-between">
         <div id="listBarang" class="d-flex flex-wrap justify-content-center gap-3"></div>
         <x-informasi-barang></x-informasi-barang>
@@ -11,6 +11,7 @@
 <script>
     let barang = [];
     let kategori = [];
+    let kategoriSelected = '';
     $(document).ready(function() {
         loadData();
     });
@@ -28,10 +29,6 @@
         })
     }
 
-    function confirmBeli(id_barang) {
-        $('#confirmBeli').show()
-    }
-
     function showInformasi(id) {
         $('#informasi-barang').show();
         $('#nama-barang').html(barang[id].nama_barang);
@@ -42,13 +39,14 @@
         $('#foto-barang').attr('alt', barang[id].nama_barang);
     }
 
-    function filterByKategori(idKategori) {
+    function getBarangByKategori(idKategori) {
         $.ajax({
             type: "GET",
-            url: `{{ url('/dashboard/getData/${idKategori}') }}`,
+            url: `{{ url('/dashboard/getData/kategori/${idKategori}') }}`,
             dataType: 'json',
             success: function(res) {
                 barang = res.barang;
+                kategoriSelected = res.kategoriSelected;
                 showListBarang();
             }
         })
@@ -56,14 +54,15 @@
     }
 
     function showListBarang() {
-        // console.log(res);
+        $('#informasi-barang').hide();
+        
         // Show all category button
         let elementKategori = ``;
         elementKategori += `<button class="btn btn-primary" onclick="loadData()">All</button>`;
         for (let i = 0; i < kategori.length; i++) {
             elementKategori += 
             `
-            <button onclick="filterByKategori(${kategori[i].id_kategori})">${kategori[i].nama_kategori}</button>
+            <button onclick="getBarangByKategori(${kategori[i].id_kategori})">${kategori[i].nama_kategori}</button>
             `
         }
         
@@ -95,5 +94,39 @@
                 `
         }
         $('#listBarang').html(elementBarang);
+    }
+
+    function getBarangByKeyword(keyword) {
+        if (kategoriSelected) {
+            if (keyword === '') {
+                getBarangByKategori(kategoriSelected);
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: `{{ url('/dashboard/getData/kategori/${kategoriSelected}/keyword/${keyword}') }}`,
+                    dataType: 'json',
+                    success: function(res) {
+                        barang = res.barang;
+                        kategoriSelected = res.kategoriSelected;
+                        showListBarang();
+                    }
+                })
+            }
+        } else {
+            if (keyword === '') {
+                loadData();
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: `{{ url('/dashboard/getData/keyword/${keyword}') }}`,
+                    dataType: 'json',
+                    success: function(res) {
+                        barang = res.barang;
+                        kategoriSelected = res.kategoriSelected;
+                        showListBarang();
+                    }
+                })
+            }
+        }
     }
 </script>

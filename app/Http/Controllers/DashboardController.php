@@ -101,6 +101,23 @@ class DashboardController extends Controller
         $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori',$id_kategori)->get();
         $kategori = Kategori::all();
 
+        return Response()->json(['barang' => $barang, 'kategori' => $kategori, 'kategoriSelected' => $id_kategori]);
+    }
+    
+    public function getBarangByKeywordKategori($id_kategori, $keyword) {
+        $id_user = Auth::user()->id_siswa;
+        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori',$id_kategori)->where('nama_barang', 'LIKE', '%'.$keyword.'%')->get();
+        $kategori = Kategori::all();
+
+        return Response()->json(['barang' => $barang, 'kategori' => $kategori, 'kategoriSelected' => $id_kategori]);
+    }
+
+    public function getBarangByKeyword($keyword) {
+        $id_user = Auth::user()->id_siswa;
+        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('nama_barang', 'LIKE', '%'.$keyword.'%')->get();
+        $kategori = Kategori::all();
+
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
     }
+
 }
