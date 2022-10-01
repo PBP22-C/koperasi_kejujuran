@@ -1,3 +1,7 @@
+body {
+    background: #1b1a1d;
+}
+
 .box-price {
     display: flex;
     flex-direction: column;
@@ -9,12 +13,43 @@
     border-radius: 15px;
 }
 
-.main{
+.main {
     margin-left: 250px;
 }
 
 @media screen and (max-width: 600px) {
-    .main{
+    .main {
         margin-left: 160px;
     }
+}
+
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+.h-custom {
+    height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+.icon-nav-link {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.icon-nav-link.active {
+    background: linear-gradient(180deg, #fd7a32 0%, #ffa149 100%);
 }

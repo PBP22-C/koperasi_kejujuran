@@ -1,7 +1,8 @@
 <x-layout>
     <div class="container row mb-4">
         <div class="col-6">
-            <input type="text" oninput="getBarangByKeyword(this.value)" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+            <input type="text" oninput="getBarangByKeyword(this.value)" class="form-control" placeholder="Search"
+                aria-label="Search" aria-describedby="button-addon2">
         </div>
         <div class="col-6 my-auto">
             <i class="fa-solid fa-search col-6"></i>
@@ -35,6 +36,7 @@
             success: function(res) {
                 barang = res.barang;
                 kategori = res.kategori;
+                kategoriSelected = '';
                 showListBarang();
             }
         })
@@ -74,14 +76,15 @@
 
     function showListBarang() {
         $('#informasi-barang').hide();
-        
+
         // Show all category button
         let elementKategori = ``;
-        elementKategori += `<button class="btn btn-outline-light" onclick="loadData()">All</button>`;
+        elementKategori +=
+            `<button class="btn ${kategoriSelected == '' ? 'btn-primary' : 'btn-outline-light'}" onclick="loadData()">All</button>`;
         for (let i = 0; i < kategori.length; i++) {
-            elementKategori += 
-            `
-            <button class="btn btn-outline-light" onclick="getBarangByKategori(${kategori[i].id_kategori})">${kategori[i].nama_kategori}</button>
+            elementKategori +=
+                `
+            <button class="btn ${kategoriSelected == kategori[i].id_kategori ? 'btn-primary' : 'btn-outline-light'}" onclick="getBarangByKategori(${kategori[i].id_kategori})">${kategori[i].nama_kategori}</button>
             `
         }
 
