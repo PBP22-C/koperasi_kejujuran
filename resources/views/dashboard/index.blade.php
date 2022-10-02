@@ -80,11 +80,11 @@
         // Show all category button
         let elementKategori = ``;
         elementKategori +=
-            `<button class="btn ${kategoriSelected == '' ? 'btn-primary' : 'btn-outline-light'}" onclick="loadData()">All</button>`;
+            `<button class="btn ${kategoriSelected == '' ? 'btn-light' : 'btn-outline-light'}" onclick="loadData()">All</button>`;
         for (let i = 0; i < kategori.length; i++) {
             elementKategori +=
                 `
-            <button class="btn ${kategoriSelected == kategori[i].id_kategori ? 'btn-primary' : 'btn-outline-light'}" onclick="getBarangByKategori(${kategori[i].id_kategori})">${kategori[i].nama_kategori}</button>
+            <button class="btn ${kategoriSelected == kategori[i].id_kategori ? 'btn-light' : 'btn-outline-light'}" onclick="getBarangByKategori(${kategori[i].id_kategori})">${kategori[i].nama_kategori}</button>
             `
         }
 

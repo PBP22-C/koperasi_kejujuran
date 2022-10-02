@@ -9,7 +9,8 @@
             <div class="box-price">
                 <i class="fa-solid fa-cash-register fs-1 mb-3"></i>
                 <h5 class="text-white">Total Saldo</h5>
-                <h4  id="saldoModal" class="text-white"></h3>
+                <h4 id="saldoModal" class="text-white">
+                    </h3>
             </div>
             <form id="formWithdraw" class="bg-dark text-light" enctype="multipart/form-data">
                 <div class="modal-body">
@@ -55,6 +56,7 @@
                 $('#saldoModal').html(res.data.saldoAkhir);
                 $('#saldo').html(res.data.saldoAkhir);
                 $('#modalWithdraw').modal('hide');
+                showToast(res.message);
             },
             error: function(err) {
                 console.log(err);

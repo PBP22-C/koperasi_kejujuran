@@ -59,7 +59,7 @@ class TransaksiBeliController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'success',
+            'message' => 'Barang berhasil dibeli',
             'data' => $data
         ], 200);
     }

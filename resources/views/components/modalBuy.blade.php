@@ -10,14 +10,15 @@
                 <img src="" id="modalFotoBarang" height="100" width="100" style="object-fit:cover";>
                 <h5 id="modalNamaBarang" class="p-0 m-0 text-white fw-bold"></h5>
                 <p id="modalStokBarang" class="p-0 m-0 text-white"></p>
-                <h4  id="modalHargaBarang" class="p-0 m-0 text-white"></h4>
+                <h4 id="modalHargaBarang" class="p-0 m-0 text-white"></h4>
             </div>
             <form id="formBeli" class="bg-dark text-light">
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <div class="mb-3">
                         <input type="hidden" name="modalIdBarang" id="modalIdBarang" />
-                        <label for="kuantitas" class="form-label">Jumlah Barang <span class="text-danger">*</span></label>
+                        <label for="kuantitas" class="form-label">Jumlah Barang <span
+                                class="text-danger">*</span></label>
                         <input name="kuantitas" type="number" class="form-control" id="kuantitas" min="1"
                             required />
                         <label for="harga" class="form-label">Harga <span class="text-danger">*</span></label>
@@ -38,7 +39,7 @@
 </div>
 
 <script>
-     $('#formBeli').on('submit', function(e) {
+    $('#formBeli').on('submit', function(e) {
         e.preventDefault();
         const hargaTotal = $('#harga').val();
         const kuantitas = $('#kuantitas').val();
@@ -59,6 +60,7 @@
                 showListBarang();
                 getSaldo();
                 $('#modalBuy').modal('hide');
+                showToast(res.message);
             },
             error: function(err) {
                 console.log(err);

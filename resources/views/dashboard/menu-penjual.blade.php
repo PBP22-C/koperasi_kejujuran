@@ -106,6 +106,7 @@
             success: function(res) {
                 console.log(res);
                 $('#modalBarang').modal('hide');
+                showToast(res.message);
                 resetModal();
                 showBarang();
             },
@@ -163,6 +164,7 @@
                 url: `{{ url('/dashboard/menu-penjual/delete/${id}') }}`,
                 dataType: 'json',
                 success: function(res) {
+                    showToast(res.message);
                     console.log(res);
                     showBarang();
                 }
@@ -185,5 +187,4 @@
         $('#id_kategori').val('');
     }
     // withdraw saldo
-
 </script>
