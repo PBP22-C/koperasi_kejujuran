@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->unsignedBigInteger('id_kategori')->nullable();
             $table->char('id_siswa_penjual', 6);
-    
+
             $table->foreign('id_kategori', 'fk_id_kategori')->references('id_kategori')->on('kategori');
             $table->foreign('id_siswa_penjual', 'fk_siswa_penjual')->references('id_siswa')->on('siswa');
         });
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barangs');
+        Schema::dropIfExists('barang');
     }
 };

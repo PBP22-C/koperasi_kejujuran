@@ -6,6 +6,7 @@ use App\Models\Siswa;
 use App\Models\Transaksi;
 use App\Models\TransaksiWithdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiWithdrawController extends Controller
 {
@@ -18,9 +19,9 @@ class TransaksiWithdrawController extends Controller
     {
         $data = new TransaksiWithdraw();
         $dataTransaksi = new TransaksiController();
-        $saldoSiswa = Siswa::where('id_siswa', $request->id_siswa)->first()->saldo;
+        $siswa = Siswa::where('id_siswa', $request->id_siswa)->first();
 
-        if ($request->withdraw > $saldoSiswa) {
+        if ($request->withdraw > $siswa->saldo) {
             return Response()->json(['message' => 'Saldo tidak mencukupi'], 400);
         }
 
@@ -31,21 +32,27 @@ class TransaksiWithdrawController extends Controller
             $saldo = $lastTransaksi->saldo_akhir;
             $idTransaksi = $lastTransaksi->id_transaksi + 1;
         }
-
         $request->harga_total = $saldo - $request->withdraw;
-        $dataTransaksi->store($request);
 
-        $data->id_withdraw = $idTransaksi;
-        $data->jumlah_withdraw = $request->withdraw;
-        $data->save();
+        DB::beginTransaction();
+        try {
+            $dataTransaksi->store($request);
 
-        Siswa::where('id_siswa', $request->id_siswa)->update([
-            'saldo' => $saldoSiswa - $request->withdraw
-        ]);
+            $data->id_withdraw = $idTransaksi;
+            $data->jumlah_withdraw = $request->withdraw;
+            $data->save();
 
-        return Response()->json(['message' => 'Withdraw berhasil', 'data' => [
-            'saldoAkhir' => $request->harga_total,
-            'saldoSiswa' => $saldoSiswa - $request->withdraw,
-        ]], 200);
+            $siswa->saldo -= $request->withdraw;
+            $siswa->save();
+
+            DB::commit();
+            return Response()->json(['message' => 'Withdraw berhasil', 'data' => [
+                'saldoAkhir' => $request->harga_total,
+                'saldoSiswa' => $siswa->saldo,
+            ]], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return Response()->json(['message' => $e->getMessage()], 400);
+        }
     }
 }

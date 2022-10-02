@@ -9,15 +9,10 @@ use App\Models\Barang;
 use App\Models\Siswa;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiBeliController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTransaksiBeliRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $barang = Barang::where('id_barang', $request->id_barang)->first();
@@ -25,7 +20,7 @@ class TransaksiBeliController extends Controller
         $idSiswa = $barang->id_siswa_penjual;
         $data = new TransaksiBeli();
         $dataTransaksi = new TransaksiController();
-        $saldoSiswa = Siswa::where('id_siswa', $idSiswa)->first()->saldo;
+        $siswa = Siswa::where('id_siswa', $idSiswa)->first();
 
         if ($request->kuantitas > $stok) {
             return Response()->json(['message' => 'Stok tidak mencukupi'], 400);
@@ -41,26 +36,29 @@ class TransaksiBeliController extends Controller
 
         $harga_total = $request->harga_total;
         $request->harga_total += $saldo;
-        $dataTransaksi->store($request);
 
+        DB::beginTransaction();
 
-        $data->id_beli = $idTransaksi;
-        $data->id_barang = $request->id_barang;
-        $data->kuantitas = $request->kuantitas;
-        $data->harga_total = $harga_total;
-        $data->save();
+        try {
+            $dataTransaksi->store($request);
 
-        Barang::where('id_barang', $request->id_barang)->update([
-            'stok' => $stok - $request->kuantitas
-        ]);
+            $data->id_beli = $idTransaksi;
+            $data->id_barang = $request->id_barang;
+            $data->kuantitas = $request->kuantitas;
+            $data->harga_total = $harga_total;
+            $data->save();
 
-        Siswa::where('id_siswa', $idSiswa)->update([
-            'saldo' => $saldoSiswa + $harga_total
-        ]);
+            $barang->stok -= $request->kuantitas;
+            $barang->save();
 
-        return response()->json([
-            'message' => 'Barang berhasil dibeli',
-            'data' => $data
-        ], 200);
+            $siswa->saldo += $harga_total;
+            $siswa->save();
+
+            DB::commit();
+            return Response()->json(['message' => 'Barang berhasil dibeli'], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return Response()->json(['message' => $e->getMessage()], 400);
+        }
     }
 }

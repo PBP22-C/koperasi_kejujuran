@@ -16,7 +16,6 @@ class KategoriSeeder extends Seeder
     {
         Kategori::create(
             ['nama_kategori' => 'makanan'],
-
         );
         Kategori::create(
             ['nama_kategori' => 'minuman'],
@@ -27,7 +26,6 @@ class KategoriSeeder extends Seeder
         );
         Kategori::create(
             ['nama_kategori' => 'mainan'],
-
         );
         Kategori::create(
             ['nama_kategori' => 'elektronik'],

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id("id_withdraw");
             $table->integer("jumlah_withdraw");
 
-            $table->foreign('id_withdraw', 'fk_id_withdraw')->references('id_transaksi')->on('transaksi');
+            $table->foreign('id_withdraw', 'fk_id_withdraw')->references('id_transaksi')->on('transaksi')->onDelete('cascade')->onUpdate('cascade');;
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaksi_withdraws');
+        Schema::dropIfExists('transaksi_withdraw');
     }
 };

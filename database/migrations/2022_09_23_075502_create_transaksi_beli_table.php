@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('kuantitas');
             $table->integer('harga_total');
 
-            $table->foreign('id_beli', 'fk_id_beli')->references('id_transaksi')->on('transaksi');
+            $table->foreign('id_beli', 'fk_id_beli')->references('id_transaksi')->on('transaksi')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_barang', 'fk_id_barang')->references('id_barang')->on('barang');
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaksi_belis');
+        Schema::dropIfExists('transaksi_beli');
     }
 };

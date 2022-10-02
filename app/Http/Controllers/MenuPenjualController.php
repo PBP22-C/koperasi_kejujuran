@@ -4,19 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Http\Requests\StoreBarangRequest;
-use App\Http\Requests\UpdatebarangRequest;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 class MenuPenjualController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $kategori = DB::table('kategori')->get();
@@ -34,12 +28,7 @@ class MenuPenjualController extends Controller
         return view('barang.create', ['kategori' => $kategori]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBarangRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(StoreBarangRequest $request)
     {
         $data = new Barang;
@@ -65,12 +54,6 @@ class MenuPenjualController extends Controller
         return Response()->json(['data' => $data, 'message' => 'Data Berhasil Ditambahkan'], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Barang  $barang
-     * @return \Illuminate\Http\Response
-     */
     public function show(Barang $barang)
     {
         $id_user = Auth::user()->id_siswa;
@@ -78,12 +61,6 @@ class MenuPenjualController extends Controller
         return Response()->json(['data' => $barang, 'message' => 'Data berhasil ditampilkan'], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Barang  $barang
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $barang = Barang::find($id);
@@ -92,13 +69,6 @@ class MenuPenjualController extends Controller
         return Response()->json(['data' => $barang], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatebarangRequest  $request
-     * @param  \App\Models\Barang  $barang
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreBarangRequest $request)
     {
         $data = Barang::find($request->id_barang);
