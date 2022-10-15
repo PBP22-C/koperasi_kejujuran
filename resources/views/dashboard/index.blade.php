@@ -1,13 +1,5 @@
 <x-layout>
-    <div class="container row mb-4">
-        <div class="col-6">
-            <input type="text" oninput="getBarangByKeyword(this.value)" class="form-control" placeholder="Search"
-                aria-label="Search" aria-describedby="button-addon2">
-        </div>
-        <div class="col-6 my-auto">
-            <i class="fa-solid fa-search col-6"></i>
-        </div>
-    </div>
+    <x-search-barang />
     <h1 class="text-white mb-3">Koperasi Kejujuran</h1>
 
     <div id="listKategori" class="d-flex flex-wrap justify-content-start gap-3 mb-3"></div>
@@ -61,17 +53,26 @@
     }
 
     function getBarangByKategori(idKategori) {
-        $.ajax({
-            type: "GET",
-            url: `{{ url('/dashboard/getData/kategori/${idKategori}') }}`,
-            dataType: 'json',
-            success: function(res) {
-                barang = res.barang;
-                kategoriSelected = res.kategoriSelected;
-                showListBarang();
+        const keyword = $('#keyword').val();
+        kategoriSelected = idKategori;
+        if (keyword !== "") {
+            getBarangByKeyword();
+        } else {
+            if (kategoriSelected !== "") {
+                $.ajax({
+                    type: "GET",
+                    url: `{{ url('/dashboard/getData/kategori/${idKategori}') }}`,
+                    dataType: 'json',
+                    success: function(res) {
+                        barang = res.barang;
+                        kategoriSelected = res.kategoriSelected;
+                        showListBarang();
+                    }
+                })
+            } else {
+                getBarangByKeyword();
             }
-        })
-
+        }
     }
 
     function showListBarang() {
@@ -80,7 +81,7 @@
         // Show all category button
         let elementKategori = ``;
         elementKategori +=
-            `<button class="btn ${kategoriSelected == '' ? 'btn-light' : 'btn-outline-light'}" onclick="loadData()">All</button>`;
+            `<button class="btn ${kategoriSelected == '' ? 'btn-light' : 'btn-outline-light'}" onclick="getBarangByKategori('')">All</button>`;
         for (let i = 0; i < kategori.length; i++) {
             elementKategori +=
                 `
@@ -118,7 +119,8 @@
         $('#listBarang').html(elementBarang);
     }
 
-    function getBarangByKeyword(keyword) {
+    function getBarangByKeyword() {
+        const keyword = $('#keyword').val();
         if (kategoriSelected) {
             if (keyword === '') {
                 getBarangByKategori(kategoriSelected);
@@ -144,7 +146,7 @@
                     dataType: 'json',
                     success: function(res) {
                         barang = res.barang;
-                        kategoriSelected = res.kategoriSelected;
+                        kategoriSelected = "";
                         showListBarang();
                     }
                 })

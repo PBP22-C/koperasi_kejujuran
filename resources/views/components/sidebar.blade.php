@@ -2,11 +2,10 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-2 px-sm-2 px-0 bg-dark position-fixed" style="max-width: 250px">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-
                 <div class="container d-flex flex-column align-items-center justify-content-center gap-2">
                     <img src="https://avatars.githubusercontent.com/u/114212348?s=200&v=4" alt="hugenerd" width="90"
                         height="90" class="rounded-circle">
-                    <h3 class="" id="user-name"></h3>
+                    <h3 class="fs-4 text-center" id="user-name"></h3>
                 </div>
                 <div id="saldoSiswa">Saldo: {{ Auth::user()->saldo }}</div>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
@@ -26,17 +25,6 @@
                                 class="ms-1 d-none d-sm-inline {{ Request::is('dashboard/menu-penjual') ? 'fw-bold' : '' }}">My
                                 Items</span> </a>
                     </li>
-                    {{-- <li>
-                         <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fa-solid fa-cart-shopping me-1 fs-4"></i><span
-                                class="ms-1 d-none d-sm-inline">Orders</span></a>
-                    </li>
-                    <li>
-                        <a href="#submenu2" class="nav-link px-0 align-middle ">
-                            <i class="fa-solid fa-tag fs-4 me-1"></i> <span class="ms-1 d-none d-sm-inline">My
-                                Transactions</span></a>
-
-                    </li> --}}
                 </ul>
                 <div class="box-price">
                     <i class="fa-solid fa-cash-register fs-1 mb-3"></i>
@@ -50,8 +38,6 @@
                     <a href="/logout" class="btn btn-danger">Logout</a>
                 </div>
                 <hr>
-
-
             </div>
         </div>
         <div class="col py-3">
