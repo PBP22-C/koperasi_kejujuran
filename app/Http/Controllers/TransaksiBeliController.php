@@ -36,10 +36,8 @@ class TransaksiBeliController extends Controller
 
         $harga_total = $request->harga_total;
         $request->harga_total += $saldo;
-
-        DB::beginTransaction();
-
         try {
+            DB::beginTransaction();
             $dataTransaksi->store($request);
 
             $data->id_beli = $idTransaksi;

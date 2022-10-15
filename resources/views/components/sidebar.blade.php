@@ -25,6 +25,14 @@
                                 class="ms-1 d-none d-sm-inline {{ Request::is('dashboard/menu-penjual') ? 'fw-bold' : '' }}">My
                                 Items</span> </a>
                     </li>
+                    <li>
+                        <a href="/dashboard/transaksi" class="nav-link px-0 text-white d-flex align-items-center">
+                            <i
+                                class="icon-nav-link fa-solid fa-credit-card fs-4 me-1 {{ Request::is('dashboard/transaksi') ? 'active' : '' }}"></i>
+                            <span
+                                class="ms-1 d-none d-sm-inline {{ Request::is('dashboard/transaksi') ? 'fw-bold' : '' }}">My
+                                Transactions</span> </a>
+                    </li>
                 </ul>
                 <div class="box-price">
                     <i class="fa-solid fa-cash-register fs-1 mb-3"></i>

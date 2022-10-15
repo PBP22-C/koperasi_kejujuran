@@ -17,13 +17,14 @@
                     {{ csrf_field() }}
                     <div class="mb-3">
                         <input type="hidden" name="modalIdBarang" id="modalIdBarang" />
-                        <label for="kuantitas" class="form-label">Jumlah Barang <span
-                                class="text-danger">*</span></label>
-                        <input name="kuantitas" type="number" class="form-control" id="kuantitas" min="1"
-                            required />
-                        <label for="harga" class="form-label">Harga <span class="text-danger">*</span></label>
-                        <input name="harga" type="number" class="form-control" id="harga" min="0"
-                            required />
+                        <label class="form-label">Jumlah Barang</label>
+                        <div class="d-flex align-items-center gap-1">
+                            <button onclick="decrement()" type="button" class="btn btn-outline-warning ">-</button>
+                            <span id="kuantitas" class="text-white fw-bold fs-5">1</span>
+                            <button onclick="increment()" type="button" class="btn btn-outline-warning ">+</button>
+                        </div>
+                        <label for="harga" class="form-label">Harga yang harus dibayar</label>
+                        <input name="harga" type="number" class="form-control" id="harga" disabled required />
                     </div>
                     <div id="errorModalBuy" class="text-danger"></div>
                 </div>
@@ -42,16 +43,16 @@
     $('#formBeli').on('submit', function(e) {
         e.preventDefault();
         const hargaTotal = $('#harga').val();
-        const kuantitas = $('#kuantitas').val();
+        const kuantitas = $('#kuantitas').text();
         const idBarang = $('#modalIdBarang').val();
-        console.log(idBarang);
+        console.log(idBarang, kuantitas, hargaTotal);
         const url = `{{ url('/dashboard/buy') }}`;
         $.ajax({
             type: "POST",
             url: url,
             data: {
                 harga_total: hargaTotal,
-                kuantitas,
+                kuantitas: parseInt(kuantitas),
                 id_barang: idBarang,
             },
             dataType: 'json',
@@ -68,4 +69,30 @@
             }
         });
     });
+
+    function increment() {
+        let kuantitas = $('#kuantitas').text();
+        let stock = $('#modalStokBarang').text();
+        stock = stock.split(':')[1].trim();
+        if (parseInt(kuantitas) < parseInt(stock)) {
+            let harga = $('#modalHargaBarang').text();
+            harga = harga.substring(2);
+            kuantitas = parseInt(kuantitas) + 1;
+            const hargaTotal = parseInt(harga) * parseInt(kuantitas);
+            $('#harga').val(hargaTotal);
+            $('#kuantitas').html(kuantitas);
+        }
+    }
+
+    function decrement() {
+        let kuantitas = $('#kuantitas').text();
+        if (kuantitas > 1) {
+            let harga = $('#modalHargaBarang').text();
+            harga = harga.substring(2);
+            kuantitas = parseInt(kuantitas) - 1;
+            const hargaTotal = parseInt(harga) * parseInt(kuantitas);
+            $('#harga').val(hargaTotal);
+            $('#kuantitas').html(kuantitas);
+        }
+    }
 </script>

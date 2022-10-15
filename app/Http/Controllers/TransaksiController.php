@@ -30,4 +30,18 @@ class TransaksiController extends Controller
 
         $data->save();
     }
+
+    public function show()
+    {
+        $transaksiWithdraw = DB::table('transaksi_withdraw')
+            ->join('transaksi', 'transaksi_withdraw.id_withdraw', '=', 'transaksi.id_transaksi')
+            ->where('transaksi.id_siswa', '=', Auth::user()->id_siswa)
+            ->get();
+
+        $transaksiWithdraw->map(function ($item) {
+            $item->waktu_transaksi = date('d F Y H:i:s', strtotime($item->waktu_transaksi));
+            return $item;
+        });
+        return view('dashboard.transaksi', ['transaksiWithdraw' => $transaksiWithdraw]);
+    }
 }
