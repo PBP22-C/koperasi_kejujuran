@@ -33,6 +33,7 @@ class TransaksiController extends Controller
 
     public function show()
     {
+        // Transaksi withdraw
         $transaksiWithdraw = DB::table('transaksi_withdraw')
             ->join('transaksi', 'transaksi_withdraw.id_withdraw', '=', 'transaksi.id_transaksi')
             ->where('transaksi.id_siswa', '=', Auth::user()->id_siswa)
@@ -42,6 +43,21 @@ class TransaksiController extends Controller
             $item->waktu_transaksi = date('d F Y H:i:s', strtotime($item->waktu_transaksi));
             return $item;
         });
-        return view('dashboard.transaksi', ['transaksiWithdraw' => $transaksiWithdraw]);
+        
+        // Transaksi beli
+        $transaksiBeli = DB::table('transaksi_beli')
+        ->join('transaksi', 'transaksi_beli.id_beli', '=', 'transaksi.id_transaksi')
+        ->join('barang', 'transaksi_beli.id_barang', '=', 'barang.id_barang')
+        ->join('kategori', 'barang.id_kategori', '=', 'kategori.id_kategori')
+        ->where('transaksi.id_siswa', '=', Auth::user()->id_siswa)
+        ->get();
+        
+        $transaksiBeli->map(function ($item) {
+            $item->waktu_transaksi = date('d F Y H:i:s', strtotime($item->waktu_transaksi));
+            return $item;
+        });
+
+        // dd($transaksiBeli);
+        return view('dashboard.transaksi', ['transaksiWithdraw' => $transaksiWithdraw, 'transaksiBeli' => $transaksiBeli]);
     }
 }
