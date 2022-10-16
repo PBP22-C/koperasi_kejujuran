@@ -18,7 +18,7 @@ class SiswaSeeder extends Seeder
         Siswa::create(
             [
                 'id_siswa' => '123456',
-                'nama_siswa' => fake()->name,
+                'nama_siswa' => "Dummy Akun",
                 'password' => Hash::make('123456'),
                 'saldo' => 0,
             ],

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TransaksiBeli;
 use App\Http\Requests\StoreTransaksiBeliRequest;
 use App\Http\Requests\UpdateTransaksiBeliRequest;
-use App\Models\Barang;
+use App\Models\barang;
 use App\Models\Siswa;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
-use App\Http\Requests\StoreBarangRequest;
+use App\Models\barang;
 use App\Models\Kategori;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +29,7 @@ class MenuPenjualController extends Controller
     }
 
 
-    public function store(StoreBarangRequest $request)
+    public function store(Request $request)
     {
         $data = new Barang;
         $filename = null;
@@ -69,7 +69,7 @@ class MenuPenjualController extends Controller
         return Response()->json(['data' => $barang], 200);
     }
 
-    public function update(StoreBarangRequest $request)
+    public function update(Request $request)
     {
         $data = Barang::find($request->id_barang);
         $filename = null;
@@ -104,7 +104,7 @@ class MenuPenjualController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Barang  $barang
+     * @param  \App\Models\barang  $barang
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

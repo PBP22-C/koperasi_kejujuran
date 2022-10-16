@@ -42,7 +42,7 @@ class AuthController extends Controller
 
         $request->validate([
             'nama_siswa' => 'required',
-            'id_siswa' => 'required|unique:Siswa',
+            'id_siswa' => 'required|unique:siswa',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
         ]);
@@ -91,6 +91,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->intended('/');   
+        return redirect()->intended('/');
     }
 }
