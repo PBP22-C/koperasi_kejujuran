@@ -42,17 +42,16 @@ class AuthController extends Controller
 
         $request->validate([
             'nama_siswa' => 'required',
-            'id_siswa' => 'required|unique:Siswa',
+            'id_siswa' => 'required|unique:siswa',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
         ]);
 
         //save data to siswa
-        Siswa::create([
-            'nama_siswa' => $request->nama_siswa,
-            'id_siswa' => $request->id_siswa,
-            'password' => Hash::make($request->password),
-        ]);
+        $data = new Siswa();
+        $data->id_siswa = $request->id_siswa;
+        $data->nama_siswa = $request->nama_siswa;
+        $data->password = Hash::make($request->password);
 
         if (Auth::attempt(['id_siswa' => $request->id_siswa, 'password' => $request->password])) {
             $request->session()->regenerate();
@@ -91,6 +90,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->intended('/');   
+        return redirect()->intended('/');
     }
 }
