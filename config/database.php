@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Str;
 
-$DATABASE_URL = parse_url("mysql://root:PQQpKD46nZCSSNRkxI4b@containers-us-west-40.railway.app:6995/railway");
-// $DATABASE_URL = parse_url("mysql://root:@localhost:3306/koperasi_kejujuran");
+// $DATABASE_URL = parse_url("mysql://root:PQQpKD46nZCSSNRkxI4b@containers-us-west-40.railway.app:6995/railway");
+$DATABASE_URL = parse_url("mysql://root:@localhost:3306/koperasi_kejujuran");
 return [
     /*
     |--------------------------------------------------------------------------

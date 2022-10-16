@@ -57,7 +57,7 @@ class MenuPenjualController extends Controller
     public function show(Barang $barang)
     {
         $id_user = Auth::user()->id_siswa;
-        $barang = Barang::with('kategori')->where('id_siswa_penjual',  $id_user)->get();
+        $barang = Barang::with('kategori')->where('id_siswa_penjual',  $id_user)->where('deleted', false)->get();
         return Response()->json(['data' => $barang, 'message' => 'Data berhasil ditampilkan'], 200);
     }
 
@@ -113,7 +113,7 @@ class MenuPenjualController extends Controller
         if ($barang->foto) {
             unlink(public_path('images') . '/' . $barang->foto);
         }
-        Barang::destroy($id);
+        Barang::where('id_barang', $id)->update(['deleted' => true]);
         return Response()->json(['message' => 'Data berhasil dihapus'], 200);
     }
 }
