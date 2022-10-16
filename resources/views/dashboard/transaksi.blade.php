@@ -3,9 +3,9 @@
         <h2 class="mb-4">
             Histori Transaksi Withdraw
         </h2>
-        <div id="transaksiWithdraw" class="d-flex flex-wrap gap-3">
-            <div class="table-responsive">
-                <table class="table table-light">
+        <div id="transaksiWithdraw" class="gap-3">
+            <div class="d-flex table-responsive">
+                <table class="table table-dark text-white">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -31,9 +31,9 @@
         <h2 class="mb-4">
             Histori Transaksi Beli
         </h2>
-        <div id="transaksiBeli" class="d-flex flex-wrap gap-3">
+        <div id="transaksiBeli" class="gap-3">
             <div class="table-responsive">
-                <table class="table table-light">
+                <table class="table table-dark text-white">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
