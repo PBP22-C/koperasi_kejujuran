@@ -64,8 +64,8 @@
                         <th scope="row">${i+1}</th>
                         <td>${item.jumlah_withdraw}</td>
                         <td>${item.waktu_transaksi}</td>
-                        <td><button onclick="editTransaksiWithdraw(${item.id_withdraw}, ${item.jumlah_withdraw})">Edit</button></td>
-                        <td><button onclick="deleteTransaksiWithdraw(${item.id_withdraw})">Delete</button></td>
+                        <td><button class="btn btn-light" onclick="editTransaksiWithdraw(${item.id_withdraw}, ${item.jumlah_withdraw})">Edit</button></td>
+                        <td><button class="btn btn-light" onclick="deleteTransaksiWithdraw(${item.id_withdraw})">Delete</button></td>
                     </tr>
             `
         }
