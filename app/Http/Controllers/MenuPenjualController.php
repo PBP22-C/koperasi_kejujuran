@@ -110,8 +110,8 @@ class MenuPenjualController extends Controller
     public function destroy($id)
     {
         $barang = Barang::find($id);
-        if ($barang->foto) {
-            unlink(public_path('images') . '/' . $barang->foto);
+        if ($barang->foto && file_exists(public_path('images') . '/' . $barang->foto)) {
+            $result = unlink(public_path('images') . '/' . $barang->foto);
         }
         Barang::where('id_barang', $id)->update(['deleted' => true]);
         return Response()->json(['message' => 'Data berhasil dihapus'], 200);
