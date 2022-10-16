@@ -5,80 +5,18 @@
         </h2>
         <div id="transaksiWithdraw" class="d-flex flex-wrap gap-3"></div>
     </div>
-    {{-- <div class="container my-5">
+    <div class="container my-5">
         <h2 class="mb-4">
             Histori Transaksi Beli
         </h2>
-        <div id="transaksiBeli" class="d-flex flex-wrap gap-3">
-            <div class="table-responsive">
-                <table class="table table-light">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Barang</th>
-                            <th scope="col">Waktu Beli</th>
-                            <th scope="col">Kategori</th>
-                            <th scope="col">Kuantitas</th>
-                            <th scope="col">Harga Satuan</th>
-                            <th scope="col">Harga Total</th>    
-                            <th scope="col" colspan="2">Action</th>    
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($transaksiBeli as $item)
-                            <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $item->nama_barang }}</td>
-                                <td>{{ $item->waktu_transaksi }}</td>
-                                <td>{{ $item->nama_kategori }}</td>
-                                <td>{{ $item->kuantitas }}</td>
-                                <td>{{ $item->harga }}</td>
-                                <td>{{ $item->harga_total }}</td>
-                                <td><button onclick="editTransaksiBeli({{$item->id_beli}})">Edit</button></td>
-                                <td><button onclick="deleteTransaksiBeli({{$item->id_beli}})">Delete</button></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+        <div id="transaksiBeli" class="d-flex flex-wrap gap-3"></div>
     </div>
     <div class="container my-5">
         <h2 class="mb-4">
             Histori Barang Terjual
         </h2>
-        <div id="barangTerjual" class="d-flex flex-wrap gap-3">
-            <div class="table-responsive">
-                <table class="table table-light">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Barang</th>
-                            <th scope="col">Waktu Terjual</th>
-                            <th scope="col">Kategori</th>
-                            <th scope="col">Kuantitas</th>
-                            <th scope="col">Harga Satuan</th>
-                            <th scope="col">Harga Total</th>      
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($barangTerjual as $item)
-                            <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $item->nama_barang }}</td>
-                                <td>{{ $item->waktu_transaksi }}</td>
-                                <td>{{ $item->nama_kategori }}</td>
-                                <td>{{ $item->kuantitas }}</td>
-                                <td>{{ $item->harga }}</td>
-                                <td>{{ $item->harga_total }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div> --}}
+        <div id="barangTerjual" class="d-flex flex-wrap gap-3"></div>
+    </div>
 </x-layout>
 
 <script>
@@ -137,8 +75,87 @@
                 </table>
             </div>
         `
-
         $('#transaksiWithdraw').html(elementTransaksiWithdraw) 
+
+        // Load data transaksi beli
+        elementTransaksiBeli = `
+            <div class="table-responsive">
+                <table class="table table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Barang</th>
+                            <th scope="col">Waktu Beli</th>
+                            <th scope="col">Kategori</th>
+                            <th scope="col">Kuantitas</th>
+                            <th scope="col">Harga Satuan</th>
+                            <th scope="col">Harga Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `
+
+        for (let i = 0; i < transaksiBeli.length; i++) {  
+            item = transaksiBeli[i];
+            elementTransaksiBeli += `
+                    <tr>
+                        <th scope="row">${i}</th>
+                        <td>${item.nama_barang}</td>
+                        <td>${item.waktu_transaksi}</td>
+                        <td>${item.nama_kategori}</td>
+                        <td>${item.kuantitas}</td>
+                        <td>${item.harga}</td>
+                        <td>${item.harga_total}</td>
+                    </tr>
+            `
+        }
+        
+        elementTransaksiBeli += `
+                    </tbody>
+                </table>
+            </div>
+        `
+        $('#transaksiBeli').html(elementTransaksiBeli) 
+
+        // Load data transaksi beli
+        elementBarangTerjual = `
+            <div class="table-responsive">
+                <table class="table table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Barang</th>
+                            <th scope="col">Waktu Beli</th>
+                            <th scope="col">Kategori</th>
+                            <th scope="col">Kuantitas</th>
+                            <th scope="col">Harga Satuan</th>
+                            <th scope="col">Harga Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `
+
+        for (let i = 0; i < barangTerjual.length; i++) {  
+            item = barangTerjual[i];
+            elementBarangTerjual += `
+                    <tr>
+                        <th scope="row">${i}</th>
+                        <td>${item.nama_barang}</td>
+                        <td>${item.waktu_transaksi}</td>
+                        <td>${item.nama_kategori}</td>
+                        <td>${item.kuantitas}</td>
+                        <td>${item.harga}</td>
+                        <td>${item.harga_total}</td>
+                    </tr>
+            `
+        }
+        
+        elementBarangTerjual += `
+                    </tbody>
+                </table>
+            </div>
+        `
+        $('#barangTerjual').html(elementBarangTerjual) 
     }
 
     function editTransaksiWithdraw(id_withdraw, jumlah_withdraw_awal) {
@@ -150,7 +167,22 @@
         $('#submitWithdraw').html('Edit');
         $('#submitWithdraw').val(`/edit`);
     }
-    // function editTransaksiWithdraw(id_transaksi) {
-        
-    // }
+
+    function deleteTransaksiWithdraw(id_transaksi) {
+        $.ajax({
+            type: "DELETE",
+            url: `{{ url('dashboard/withdraw/delete/${id_transaksi}') }}`,
+            dataType: 'json',
+            success: function(res) {
+                $('#saldoSiswa').html(`Saldo: ${res.data.saldoSiswa}`);
+                $('#saldoModal').html(res.data.saldoAkhir);
+                $('#saldo').html(res.data.saldoAkhir);
+                loadData()
+            },
+            error: function(err) {
+                console.log(err);
+                $('#errorModalWithdraw').html(err.responseJSON.message);
+            }
+        })
+    }
 </script>

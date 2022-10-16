@@ -92,6 +92,7 @@
         $('#withdraw').val('');
         $('#modalWithdraw').modal('show');
         $('#modalWithdrawTitle').html('Withdraw');
-        $('#submitWitdraw').html('Tarik Uang');
+        $('#submitWithdraw').html('Tarik Uang');
+        $('#submitWithdraw').val('')
     }
 </script>

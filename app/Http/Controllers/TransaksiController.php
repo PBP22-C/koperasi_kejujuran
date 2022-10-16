@@ -30,6 +30,7 @@ class TransaksiController extends Controller
     {
         $userId = Auth::user()->id_siswa;
         $data = new Transaksi();
+        $data->id_transaksi = $request->idTransaksi;
         $data->id_siswa = $userId;
         $data->saldo_akhir = $request->harga_total;
         $data->waktu_transaksi = date('Y-m-d H:i:s', strtotime('+7 hours'));

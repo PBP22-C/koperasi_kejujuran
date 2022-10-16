@@ -6,6 +6,7 @@ use App\Models\Siswa;
 use App\Models\Transaksi;
 use App\Models\TransaksiWithdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TransaksiWithdrawController extends Controller
@@ -17,6 +18,8 @@ class TransaksiWithdrawController extends Controller
      */
     public function withdraw(Request $request)
     {
+        unset($request['id_transaksi']);
+        unset($request['withdraw_awal']);
         $data = new TransaksiWithdraw();
         $dataTransaksi = new TransaksiController();
         $siswa = Siswa::where('id_siswa', $request->id_siswa)->first();
@@ -27,13 +30,13 @@ class TransaksiWithdrawController extends Controller
 
         $saldo = 0;
         $idTransaksi = 1;
-        $lastTransaksi = Transaksi::orderBy('waktu_transaksi', 'desc')->first();
+        $lastTransaksi = Transaksi::orderBy('id_transaksi', 'desc')->first();
         if ($lastTransaksi != null) {
             $saldo = $lastTransaksi->saldo_akhir;
             $idTransaksi = $lastTransaksi->id_transaksi + 1;
         }
         $request->harga_total = $saldo - $request->withdraw;
-
+        $request->idTransaksi = $idTransaksi;
         DB::beginTransaction();
         try {
             $dataTransaksi->store($request);
@@ -71,7 +74,7 @@ class TransaksiWithdrawController extends Controller
             if ($lastTransaksi != null) {
                 $saldo = $lastTransaksi->saldo_akhir;
             }
-            $saldoAkhir = $saldo + $selisihWithdraw;
+            $saldoAkhir = $saldo - $selisihWithdraw;
     
             DB::beginTransaction();
             try {
@@ -89,13 +92,40 @@ class TransaksiWithdrawController extends Controller
     
                 DB::commit();
                 return Response()->json(['message' => 'Edit withdraw berhasil', 'data' => [
-                    'saldoAkhir' => $request->harga_total,
+                    'saldoAkhir' => $saldoAkhir,
                     'saldoSiswa' => $siswa->saldo - $selisihWithdraw,
                 ]], 200);
             } catch (\Exception $e) {
                 DB::rollback();
                 return Response()->json(['message' => $e->getMessage()], 400);
             }
+        }
+    }
+
+    public function delete($idTransaksi) {
+        DB::beginTransaction();
+        try {
+            // Update saldo siswa
+            $saldo = Siswa::where('id_siswa', Auth::user()->id_siswa)->value('saldo');
+            $jumlahWithdraw = TransaksiWithdraw::where('id_withdraw', $idTransaksi)->value('jumlah_withdraw');
+
+            Siswa::where('id_siswa', Auth::user()->id_siswa)
+            ->update(['saldo' => $saldo + $jumlahWithdraw]);
+            
+            // Update saldo akhir
+            Transaksi::orderBy('waktu_transaksi', 'desc')->first()->saldo_akhir += $jumlahWithdraw;
+
+            DB::table('transaksi')->where('id_transaksi', $idTransaksi)->delete();
+            DB::table('transaksi_withdraw')->where('id_withdraw', $idTransaksi)->delete();
+
+            DB::commit();
+            return Response()->json(['message' => 'Edit withdraw berhasil', 'data' => [
+                'saldoAkhir' =>  Transaksi::orderBy('waktu_transaksi', 'desc')->first()->saldo_akhir,
+                'saldoSiswa' => $saldo + $jumlahWithdraw
+            ]], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return Response()->json(['message' => $e->getMessage()], 400);
         }
     }
 }

@@ -47,7 +47,6 @@ Route::middleware(['auth', 'revalidate'])->group(function () {
 
     // Menu pembeli
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
-    Route::post('/dashboard/buy', 'App\Http\Controllers\DashboardController@buy');
     Route::get('/dashboard/getData', 'App\Http\Controllers\DashboardController@getData');
     Route::get('/dashboard/getData/kategori/{idKategori}', 'App\Http\Controllers\DashboardController@getBarangByKategori');
     Route::get('/dashboard/getData/kategori/{idKategori}/keyword/{keyword}', 'App\Http\Controllers\DashboardController@getBarangByKeywordKategori');
@@ -56,6 +55,7 @@ Route::middleware(['auth', 'revalidate'])->group(function () {
     // Transaksi
     Route::post('/dashboard/withdraw', 'App\Http\Controllers\TransaksiWithdrawController@withdraw');
     Route::post('/dashboard/withdraw/edit', 'App\Http\Controllers\TransaksiWithdrawController@edit');
+    Route::delete('/dashboard/withdraw/delete/{idTransaksi}', 'App\Http\Controllers\TransaksiWithdrawController@delete');
     Route::post('/dashboard/buy', 'App\Http\Controllers\TransaksiBeliController@store');
     Route::get('/dashboard/transaksi', 'App\Http\Controllers\TransaksiController@index');
     Route::get('/dashboard/transaksi/getData', 'App\Http\Controllers\TransaksiController@getData');

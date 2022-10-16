@@ -21,7 +21,7 @@ class TransaksiBeliController extends Controller
         $data = new TransaksiBeli();
         $dataTransaksi = new TransaksiController();
         $siswa = Siswa::where('id_siswa', $idSiswa)->first();
-
+    
         if ($request->kuantitas > $stok) {
             return Response()->json(['message' => 'Stok tidak mencukupi'], 400);
         }
@@ -36,8 +36,9 @@ class TransaksiBeliController extends Controller
 
         $harga_total = $request->harga_total;
         $request->harga_total += $saldo;
+        $request->idTransaksi = $idTransaksi;
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
             $dataTransaksi->store($request);
 
             $data->id_beli = $idTransaksi;
