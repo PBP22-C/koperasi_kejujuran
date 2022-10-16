@@ -48,10 +48,11 @@ class AuthController extends Controller
         ]);
 
         //save data to siswa
-        $data = new Siswa();
-        $data->id_siswa = $request->id_siswa;
-        $data->nama_siswa = $request->nama_siswa;
-        $data->password = Hash::make($request->password);
+        Siswa::create([
+            'nama_siswa' => $request->nama_siswa,
+            'id_siswa' => $request->id_siswa,
+            'password' => Hash::make($request->password),
+        ]);
 
         if (Auth::attempt(['id_siswa' => $request->id_siswa, 'password' => $request->password])) {
             $request->session()->regenerate();
