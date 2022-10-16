@@ -104,7 +104,7 @@ class MenuPenjualController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Barang  $barang
+     * @param  \App\Models\barang  $barang
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

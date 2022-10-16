@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
+use App\Models\barang;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,25 +55,28 @@ class DashboardController extends Controller
         //
     }
 
-    public function getData() {
+    public function getData()
+    {
         $id_user = Auth::user()->id_siswa;
         $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->get();
         $kategori = Kategori::all();
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
     }
-    
-    public function getBarangByKeywordKategori($id_kategori, $keyword) {
+
+    public function getBarangByKeywordKategori($id_kategori, $keyword)
+    {
         $id_user = Auth::user()->id_siswa;
-        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori',$id_kategori)->where('nama_barang', 'LIKE', '%'.$keyword.'%')->get();
+        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori', $id_kategori)->where('nama_barang', 'LIKE', '%' . $keyword . '%')->get();
         $kategori = Kategori::all();
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori, 'kategoriSelected' => $id_kategori]);
     }
 
-    public function getBarangByKeyword($keyword) {
+    public function getBarangByKeyword($keyword)
+    {
         $id_user = Auth::user()->id_siswa;
-        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('nama_barang', 'LIKE', '%'.$keyword.'%')->get();
+        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('nama_barang', 'LIKE', '%' . $keyword . '%')->get();
         $kategori = Kategori::all();
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
