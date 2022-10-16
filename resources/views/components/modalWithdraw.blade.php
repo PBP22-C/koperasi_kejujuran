@@ -17,6 +17,8 @@
                     {{ csrf_field() }}
                     <div class="mb-3">
                         <input type="hidden" name="id_siswa" id="id_siswa" value="{{ Auth::user()->id_siswa }}">
+                        <input type="hidden" name="id_transaksi" id="id_transaksi" value="0">
+                        <input type="hidden" name="withdraw_awal" id="withdraw_awal" value="0">
                         <label for="withdraw" class="form-label">Jumlah Uang <span class="text-danger">*</span></label>
                         <input name="withdraw" type="number" class="form-control" id="withdraw" min="0"
                             required>
@@ -27,7 +29,7 @@
                     <button class="btn btn-outline-danger" data-bs-dismiss="modal" type="button">
                         Kembali
                     </button>
-                    <button id="submitWitdraw" type="submit" class="btn btn-primary"></button>
+                    <button id="submitWithdraw" type="submit" value="" class="btn btn-primary"></button>
                 </div>
             </form>
         </div>
@@ -35,13 +37,12 @@
 </div>
 
 <script>
-    $("#formWithdraw").on('submit', function(e) {
-        e.preventDefault();
+    $("#formWithdraw").bind('submit', function(e) {
         $('#submitButton').html('Loading...');
         $('#submitButton').attr('disabled', true);
         const form = new FormData(this);
         form.append('withdraw', $('#withdraw').val());
-        const url = '/dashboard/withdraw';
+        const url = `/dashboard/withdraw${$('#submitWithdraw').val()}`;
         $.ajax({
             type: "POST",
             url: url,
@@ -57,11 +58,16 @@
                 $('#saldo').html(res.data.saldoAkhir);
                 $('#modalWithdraw').modal('hide');
                 showToast(res.message);
+
+                // Tampilkan ulang data bila mengedit transaksi
+                loadData()
             },
             error: function(err) {
                 console.log(err);
                 $('#errorModalWithdraw').html(err.responseJSON.message);
             }
         });
+        e.preventDefault();
+        return false
     });
 </script>

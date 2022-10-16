@@ -27,7 +27,7 @@ class TransaksiWithdrawController extends Controller
 
         $saldo = 0;
         $idTransaksi = 1;
-        $lastTransaksi = Transaksi::orderBy('id_transaksi', 'desc')->first();
+        $lastTransaksi = Transaksi::orderBy('waktu_transaksi', 'desc')->first();
         if ($lastTransaksi != null) {
             $saldo = $lastTransaksi->saldo_akhir;
             $idTransaksi = $lastTransaksi->id_transaksi + 1;
@@ -53,6 +53,49 @@ class TransaksiWithdrawController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             return Response()->json(['message' => $e->getMessage()], 400);
+        }
+    }
+
+    public function edit(Request $request) {
+        $dataTransaksi = new TransaksiController();
+        $siswa = Siswa::where('id_siswa', $request->id_siswa)->first();
+
+        // dd($request);
+        $selisihWithdraw = $request->withdraw - $request->withdraw_awal;
+        if ($selisihWithdraw > $siswa->saldo) {
+            return Response()->json(['message' => 'Saldo tidak mencukupi'], 400);
+        } else {
+            $saldo = 0;
+            $lastTransaksi = Transaksi::orderBy('waktu_transaksi', 'desc')->first();
+            // dd($lastTransaksi);
+            if ($lastTransaksi != null) {
+                $saldo = $lastTransaksi->saldo_akhir;
+            }
+            $saldoAkhir = $saldo + $selisihWithdraw;
+    
+            DB::beginTransaction();
+            try {
+                $dataTransaksi->update($request->id_transaksi, $saldoAkhir);
+    
+                TransaksiWithdraw::where('id_withdraw', $request->id_transaksi)
+                    ->update([
+                        'jumlah_withdraw' => $request->withdraw
+                    ]);
+            
+                Siswa::where('id_siswa', $request->id_siswa)
+                    ->update([
+                        'saldo' => $siswa->saldo - $selisihWithdraw
+                    ]);
+    
+                DB::commit();
+                return Response()->json(['message' => 'Edit withdraw berhasil', 'data' => [
+                    'saldoAkhir' => $request->harga_total,
+                    'saldoSiswa' => $siswa->saldo - $selisihWithdraw,
+                ]], 200);
+            } catch (\Exception $e) {
+                DB::rollback();
+                return Response()->json(['message' => $e->getMessage()], 400);
+            }
         }
     }
 }

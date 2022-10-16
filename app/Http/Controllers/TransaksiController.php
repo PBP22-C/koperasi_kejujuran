@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
+    public function index()
+    {
+        return view('dashboard.transaksi');
+    }
+
     public function saldo()
     {
         $transaksi = DB::table('transaksi')->where('id_transaksi', '=', DB::table('transaksi')->max('id_transaksi'))->get();
@@ -31,7 +36,15 @@ class TransaksiController extends Controller
         $data->save();
     }
 
-    public function show()
+    public function update($id_transaksi, $saldo_akhir) {
+        Transaksi::where('id_transaksi', $id_transaksi)
+            ->update([
+                'saldo_akhir' => $saldo_akhir,
+                'waktu_transaksi' => date('Y-m-d H:i:s', strtotime('+7 hours'))
+            ]);
+    }
+
+    public function getData()
     {
         // Transaksi withdraw
         $transaksiWithdraw = DB::table('transaksi_withdraw')
@@ -43,6 +56,8 @@ class TransaksiController extends Controller
             $item->waktu_transaksi = date('d F Y H:i:s', strtotime($item->waktu_transaksi));
             return $item;
         });
+
+        // dd($transaksiWithdraw);
 
         // Transaksi beli
         $transaksiBeli = DB::table('transaksi_beli')
@@ -56,8 +71,24 @@ class TransaksiController extends Controller
             $item->waktu_transaksi = date('d F Y H:i:s', strtotime($item->waktu_transaksi));
             return $item;
         });
+        
+        // Barang terjual
+        $barangTerjual = DB::table('transaksi_beli')
+            ->join('transaksi', 'transaksi_beli.id_beli', '=', 'transaksi.id_transaksi')
+            ->join('barang', 'transaksi_beli.id_barang', '=', 'barang.id_barang')
+            ->join('kategori', 'barang.id_kategori', '=', 'kategori.id_kategori')
+            ->where('barang.id_siswa_penjual', '=', Auth::user()->id_siswa)
+            ->get();
 
-        // dd($transaksiBeli);
-        return view('dashboard.transaksi', ['transaksiWithdraw' => $transaksiWithdraw, 'transaksiBeli' => $transaksiBeli]);
+        $barangTerjual->map(function ($item) {
+            $item->waktu_transaksi = date('d F Y H:i:s', strtotime($item->waktu_transaksi));
+            return $item;
+        });
+
+        return Response()->json([
+            'transaksiWithdraw' => $transaksiWithdraw, 
+            'transaksiBeli' => $transaksiBeli,
+            'barangTerjual' => $barangTerjual
+        ]);
     }
 }

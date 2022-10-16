@@ -21,20 +21,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        $id_user = Auth::user()->id_siswa;
-        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('stok', '>', 0)->get();
-        $kategori = Kategori::all();
 
-        return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
-    }
-
-    public function getBarangByKategori($id_kategori)
-    {
-        $id_user = Auth::user()->id_siswa;
-        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori', $id_kategori)->get();
-        $kategori = Kategori::all();
-
-        return Response()->json(['barang' => $barang, 'kategori' => $kategori, 'kategoriSelected' => $id_kategori]);
     }
 
     // get nama user
@@ -52,22 +39,43 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 
     public function getData()
     {
         $id_user = Auth::user()->id_siswa;
-        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->get();
+        $barang = Barang::with('kategori')
+            ->where('id_siswa_penjual', '!=', $id_user)
+            ->where('stok', '>', 0)
+            ->get();
         $kategori = Kategori::all();
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
     }
 
+    public function getBarangByKategori($id_kategori)
+    {
+        $id_user = Auth::user()->id_siswa;
+        $barang = Barang::with('kategori')
+            ->where('id_siswa_penjual', '!=', $id_user)
+            ->where('stok', '>', 0)
+            ->where('id_kategori', $id_kategori)
+            ->get();
+        $kategori = Kategori::all();
+
+        return Response()->json(['barang' => $barang, 'kategori' => $kategori, 'kategoriSelected' => $id_kategori]);
+    }
+    
     public function getBarangByKeywordKategori($id_kategori, $keyword)
     {
         $id_user = Auth::user()->id_siswa;
-        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('id_kategori', $id_kategori)->where('nama_barang', 'LIKE', '%' . $keyword . '%')->get();
+        $barang = Barang::with('kategori')
+            ->where('id_siswa_penjual', '!=', $id_user)
+            ->where('id_kategori', $id_kategori)
+            ->where('nama_barang', 'LIKE', '%' . $keyword . '%')
+            ->where('stok', '>', 0)
+            ->get();
         $kategori = Kategori::all();
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori, 'kategoriSelected' => $id_kategori]);
@@ -76,7 +84,11 @@ class DashboardController extends Controller
     public function getBarangByKeyword($keyword)
     {
         $id_user = Auth::user()->id_siswa;
-        $barang = Barang::with('kategori')->where('id_siswa_penjual', '!=', $id_user)->where('nama_barang', 'LIKE', '%' . $keyword . '%')->get();
+        $barang = Barang::with('kategori')
+            ->where('id_siswa_penjual', '!=', $id_user)
+            ->where('nama_barang', 'LIKE', '%' . $keyword . '%')
+            ->where('stok', '>', 0)
+            ->get();
         $kategori = Kategori::all();
 
         return Response()->json(['barang' => $barang, 'kategori' => $kategori]);
