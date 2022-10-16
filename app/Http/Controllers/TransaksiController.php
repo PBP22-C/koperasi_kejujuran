@@ -27,6 +27,7 @@ class TransaksiController extends Controller
         $data = new Transaksi();
         $data->id_siswa = $userId;
         $data->saldo_akhir = $request->harga_total;
+        $data->waktu_transaksi = date('Y-m-d H:i:s');
 
         $data->save();
     }
@@ -43,15 +44,15 @@ class TransaksiController extends Controller
             $item->waktu_transaksi = date('d F Y H:i:s', strtotime($item->waktu_transaksi));
             return $item;
         });
-        
+
         // Transaksi beli
         $transaksiBeli = DB::table('transaksi_beli')
-        ->join('transaksi', 'transaksi_beli.id_beli', '=', 'transaksi.id_transaksi')
-        ->join('barang', 'transaksi_beli.id_barang', '=', 'barang.id_barang')
-        ->join('kategori', 'barang.id_kategori', '=', 'kategori.id_kategori')
-        ->where('transaksi.id_siswa', '=', Auth::user()->id_siswa)
-        ->get();
-        
+            ->join('transaksi', 'transaksi_beli.id_beli', '=', 'transaksi.id_transaksi')
+            ->join('barang', 'transaksi_beli.id_barang', '=', 'barang.id_barang')
+            ->join('kategori', 'barang.id_kategori', '=', 'kategori.id_kategori')
+            ->where('transaksi.id_siswa', '=', Auth::user()->id_siswa)
+            ->get();
+
         $transaksiBeli->map(function ($item) {
             $item->waktu_transaksi = date('d F Y H:i:s', strtotime($item->waktu_transaksi));
             return $item;
