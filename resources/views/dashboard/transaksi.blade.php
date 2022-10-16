@@ -3,19 +3,19 @@
         <h2 class="mb-4">
             Histori Transaksi Withdraw
         </h2>
-        <div id="transaksiWithdraw" class="d-flex flex-wrap gap-3"></div>
+        <div id="transaksiWithdraw" class="gap-3"></div>
     </div>
     <div class="container my-5">
         <h2 class="mb-4">
             Histori Transaksi Beli
         </h2>
-        <div id="transaksiBeli" class="d-flex flex-wrap gap-3"></div>
+        <div id="transaksiBeli" class="gap-3"></div>
     </div>
     <div class="container my-5">
         <h2 class="mb-4">
             Histori Barang Terjual
         </h2>
-        <div id="barangTerjual" class="d-flex flex-wrap gap-3"></div>
+        <div id="barangTerjual" class="gap-3"></div>
     </div>
 </x-layout>
 
@@ -45,8 +45,8 @@
     function showData() {
         // Load data transaksi withdraw
         let elementTransaksiWithdraw = `
-            <div class="table-responsive">
-                <table class="table table-light">
+            <div class="d-flex table-responsive">
+                <table class="table table-dark text-white">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -80,7 +80,7 @@
         // Load data transaksi beli
         elementTransaksiBeli = `
             <div class="table-responsive">
-                <table class="table table-light">
+                <table class="table table-dark text-white">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -120,7 +120,7 @@
         // Load data transaksi beli
         elementBarangTerjual = `
             <div class="table-responsive">
-                <table class="table table-light">
+                <table class="table table-dark text-white">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
