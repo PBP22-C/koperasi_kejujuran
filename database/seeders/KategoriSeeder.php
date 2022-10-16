@@ -15,23 +15,23 @@ class KategoriSeeder extends Seeder
     public function run()
     {
         Kategori::create(
-            ['nama_kategori' => 'makanan'],
+            ['nama_kategori' => 'Makanan'],
         );
         Kategori::create(
-            ['nama_kategori' => 'minuman'],
+            ['nama_kategori' => 'Minuman'],
         );
         Kategori::create(
-            ['nama_kategori' => 'pakaian'],
+            ['nama_kategori' => 'Pakaian'],
 
         );
         Kategori::create(
-            ['nama_kategori' => 'mainan'],
+            ['nama_kategori' => 'Mainan'],
         );
         Kategori::create(
-            ['nama_kategori' => 'elektronik'],
+            ['nama_kategori' => 'Elektronik'],
         );
         Kategori::create(
-            ['nama_kategori' => 'alat tulis'],
+            ['nama_kategori' => 'Alat Tulis'],
         );
     }
 }
