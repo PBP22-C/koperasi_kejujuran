@@ -116,7 +116,7 @@
                             <div class="card-body">
                                 <h5 class="card-title mb-0 text-white fw-bold">${item.nama_barang}</h5>
                                 <br>
-                                <small class="card-text text-secondary">Stok: ${item.stok}</small>
+                                <small class="card-text ${item.stok <= 0 ? 'text-danger' : 'text-secondary'}">Stok: ${item.stok}</small>
                                 <br>
                                 <small class="card-text text-secondary">Price: Rp${item.harga}</small>
                                 <br><br>
