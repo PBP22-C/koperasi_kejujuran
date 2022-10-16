@@ -48,6 +48,7 @@ class DashboardController extends Controller
         $barang = Barang::with('kategori')
             ->where('id_siswa_penjual', '!=', $id_user)
             ->where('stok', '>', 0)
+            ->where('deleted', false)
             ->get();
         $kategori = Kategori::all();
 
@@ -60,6 +61,7 @@ class DashboardController extends Controller
         $barang = Barang::with('kategori')
             ->where('id_siswa_penjual', '!=', $id_user)
             ->where('stok', '>', 0)
+            ->where('deleted', false)
             ->where('id_kategori', $id_kategori)
             ->get();
         $kategori = Kategori::all();
@@ -75,6 +77,7 @@ class DashboardController extends Controller
             ->where('id_kategori', $id_kategori)
             ->where('nama_barang', 'LIKE', '%' . $keyword . '%')
             ->where('stok', '>', 0)
+            ->where('deleted', false)
             ->get();
         $kategori = Kategori::all();
 
@@ -88,6 +91,7 @@ class DashboardController extends Controller
             ->where('id_siswa_penjual', '!=', $id_user)
             ->where('nama_barang', 'LIKE', '%' . $keyword . '%')
             ->where('stok', '>', 0)
+            ->where('deleted', false)
             ->get();
         $kategori = Kategori::all();
 

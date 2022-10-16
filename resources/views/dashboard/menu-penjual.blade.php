@@ -146,6 +146,9 @@
                     showToast(res.message);
                     console.log(res);
                     showBarang();
+                },
+                error: function(err) {
+                    console.log(err.responseText)
                 }
             });
         }
